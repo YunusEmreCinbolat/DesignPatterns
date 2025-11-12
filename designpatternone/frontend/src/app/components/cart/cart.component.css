@@ -1,0 +1,44 @@
+/* Bölüm kapsayıcı */
+section{
+  margin-top: 26px;
+}
+section > h2{
+  font-size: 22px; margin: 0 0 12px; letter-spacing: .01em;
+}
+
+/* Totals kutusu */
+.totals{
+  margin-top: 16px;
+  display: grid; gap: 12px;
+  grid-template-columns: 1fr;
+  background: linear-gradient(180deg, var(--card), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.totals label{
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  color: var(--muted);
+}
+.totals select{
+  border-radius: 10px; padding: 8px 10px;
+  background: #0d1424; color: var(--text);
+  border: 1px solid var(--border);
+}
+.totals .grand{
+  margin-top: 4px;
+  font-size: 20px; font-weight: 800;
+  color: color-mix(in oklab, var(--accent-2) 70%, var(--text));
+}
+
+/* Table yükseltmesi */
+table{ margin-top: 10px; }
+td:last-child{ text-align: right; }
+td button{
+  padding: 8px 10px;
+}
+td button.ghost{
+  background: transparent;
+  border: 1px dashed var(--border);
+}

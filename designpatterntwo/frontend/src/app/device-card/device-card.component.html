@@ -1,0 +1,77 @@
+<div class="device-card">
+  <!-- Başlık -->
+  <div class="device-header">
+    <h3>{{ device.name }}</h3>
+    <span
+      class="state-badge"
+      [ngClass]="{
+        on: device.state === 'ON',
+        off: device.state === 'OFF'
+      }"
+    >
+      {{ device.state }}
+    </span>
+  </div>
+
+  <!-- Cihaz Görseli -->
+  <div class="device-body" [ngSwitch]="device.type">
+    <div *ngSwitchCase="DeviceType.LIGHT" class="icon light">
+      💡
+    </div>
+
+    <div *ngSwitchCase="DeviceType.AC" class="icon ac">
+      🌬️
+    </div>
+
+    <div *ngSwitchCase="DeviceType.TV" class="icon tv">
+      📺
+    </div>
+
+    <div *ngSwitchDefault class="icon unknown">❓</div>
+  </div>
+
+  <!-- Enerji Barı -->
+  <div class="energy-container">
+    <div class="energy-bar">
+      <div
+        class="energy-fill"
+        [style.width.%]="energyLevel"
+        [ngClass]="{ active: device.state === 'ON' }"
+      ></div>
+    </div>
+    <div class="energy-text">
+      Enerji: {{ energyLevel | number : '1.0-0' }}%
+    </div>
+  </div>
+
+  <!-- Dekoratör Etiketleri -->
+  <div class="decorators" *ngIf="decorators.length > 0">
+    <span
+      *ngFor="let dec of decorators"
+      class="decorator-badge"
+      [ngClass]="{
+        'timer-badge': dec.includes('Timer'),
+        'energy-badge': dec.includes('Energy')
+      }"
+    >
+      {{ dec }}
+    </span>
+  </div>
+
+  <!-- Aç/Kapat Butonu -->
+  <div class="actions">
+    <button
+      (click)="toggleDevice()"
+      [disabled]="loading"
+      [ngClass]="{
+        'btn-on': device.state === 'OFF',
+        'btn-off': device.state === 'ON'
+      }"
+    >
+      {{ device.state === 'ON' ? 'Kapat' : 'Aç' }}
+    </button>
+  </div>
+
+  <!-- Loading Durumu -->
+  <div *ngIf="loading" class="loading">İşleniyor...</div>
+</div>

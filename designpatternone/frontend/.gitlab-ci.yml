@@ -1,0 +1,46 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  IMAGE_NAME: yunusemrec/frontendservicetrello  # Docker Hub image ismi
+  TAG: latest
+  DOCKER_DRIVER: overlay2
+
+services:
+  - docker:dind
+
+before_script:
+  - echo "Docker Hub'a giriş yapılıyor..."
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+
+build_frontendservice:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build -t $IMAGE_NAME:$CI_COMMIT_SHORT_SHA .
+    - docker tag $IMAGE_NAME:$CI_COMMIT_SHORT_SHA $IMAGE_NAME:$TAG
+    - docker push $IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $IMAGE_NAME:$TAG
+  only:
+    - main
+
+test_frontendservice:
+  stage: test
+  image: docker:latest
+  script:
+    - echo "Test aşaması (Frontend testleri opsiyonel)"
+  only:
+    - main
+
+deploy_frontendservice:
+  stage: deploy
+  image: docker:latest
+  script:
+    - docker pull $IMAGE_NAME:$TAG
+    - docker stop frontendservice_container || true
+    - docker rm frontendservice_container || true
+    - docker run -d -p 4200:80 --name frontendservice_container $IMAGE_NAME:$TAG
+  only:
+    - main

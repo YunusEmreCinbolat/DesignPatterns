@@ -1,0 +1,32 @@
+<!-- components/cart/cart.component.html -->
+<section class="container" *ngIf="vm$ | async as vm">
+  <h2>Sepet</h2>
+  <table *ngIf="vm.cart.items?.length; else empty">
+    <tr>
+      <th>Ürün</th><th>Adet</th><th>Ara Toplam</th><th></th>
+    </tr>
+    <tr *ngFor="let it of vm.cart.items">
+      <td>{{ it.product.name }}</td>
+      <td>{{ it.quantity }}</td>
+      <td>{{ it.subtotal | number:'1.2-2' }} ₺</td>
+      <td><button (click)="remove(it.product.id)">Sil</button></td>
+    </tr>
+  </table>
+  <ng-template #empty>Sepet boş.</ng-template>
+
+  <div class="totals">
+    <label>
+      İndirim:
+      <select [(ngModel)]="code">
+        <option value="PERC10">%10</option>
+        <option value="FIX50">50₺</option>
+        <option value="FREESHIP">Kargo Bedava</option>
+      </select>
+      <button (click)="apply()">Uygula</button>
+      <button (click)="clear()" class="ghost">Temizle</button>
+    </label>
+    <div>Ürünler: {{ vm.totals.itemsTotal | number:'1.2-2' }} ₺</div>
+    <div>Kargo: {{ vm.totals.shipping | number:'1.2-2' }} ₺</div>
+    <div class="grand">Toplam: {{ vm.totals.grandTotal | number:'1.2-2' }} ₺</div>
+  </div>
+</section>

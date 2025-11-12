@@ -1,0 +1,79 @@
+/* ====== Theme tokens ====== */
+:root{
+  --bg: #0f172a;           /* slate-900 */
+  --card: #111827;         /* gray-900 */
+  --muted: #94a3b8;        /* slate-400 */
+  --text: #e5e7eb;         /* gray-200 */
+  --accent: #22c55e;       /* green-500 */
+  --accent-2: #06b6d4;     /* cyan-500 */
+  --danger: #ef4444;       /* red-500 */
+  --surface: #0b1220;      /* custom deep */
+  --border: rgba(255,255,255,0.08);
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 22px;
+}
+
+/* Light mode istersen kolay switch için: */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --text:#0f172a; --muted:#475569;
+    --border:rgba(15,23,42,0.08); --surface:#ffffff; --shadow:0 10px 30px rgba(2,6,23,0.08);
+  }
+}
+
+html, body {
+  height: 100%;
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(34,197,94,0.12), transparent 40%),
+              radial-gradient(1200px 800px at 90% 10%, rgba(6,182,212,0.12), transparent 40%),
+              var(--bg);
+  color: var(--text);
+  font: 14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  margin: 0;
+}
+
+/* Utility */
+.container{
+  max-width: 1100px; margin: 0 auto; padding: 24px;
+}
+.card{
+  background: linear-gradient(180deg, var(--card), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.btn{
+  appearance: none; border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  color: var(--text); padding: 10px 14px; border-radius: 12px;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+  cursor: pointer; font-weight: 600;
+}
+.btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.18); }
+.btn:active{ transform: translateY(0); }
+
+.btn-primary{
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 75%, #ffffff 8%), color-mix(in oklab, var(--accent) 40%, #000 20%));
+  border-color: color-mix(in oklab, var(--accent) 60%, #000 20%);
+  color: #051b0e;
+}
+.btn-danger{
+  background: linear-gradient(180deg, color-mix(in oklab, var(--danger) 75%, #fff 8%), color-mix(in oklab, var(--danger) 40%, #000 20%));
+  border-color: color-mix(in oklab, var(--danger) 60%, #000 20%);
+  color: #2d0707;
+}
+
+/* Smooth tables */
+table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: linear-gradient(180deg, var(--card), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+th, td{ padding: 14px 16px; text-align: left; }
+th{ color: var(--muted); font-weight: 600; letter-spacing: .02em; background: rgba(255,255,255,0.02); }
+tr + tr td{ border-top: 1px dashed var(--border); }

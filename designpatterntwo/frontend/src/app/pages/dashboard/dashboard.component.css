@@ -1,0 +1,11 @@
+.dashboard {
+  padding: 30px;
+  text-align: center;
+}
+
+.device-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+} 

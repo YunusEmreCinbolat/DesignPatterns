@@ -1,0 +1,32 @@
+.grid{
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(12, 1fr);
+}
+@media (max-width: 1024px){ .grid{ grid-template-columns: repeat(8,1fr); } }
+@media (max-width: 640px){ .grid{ grid-template-columns: repeat(4,1fr); } }
+
+.card{
+  grid-column: span 3;
+  padding: 18px;
+  position: relative;
+  isolation: isolate;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+@media (max-width: 1024px){ .card{ grid-column: span 4; } }
+@media (max-width: 640px){ .card{ grid-column: span 4; } }
+
+.card:hover{ transform: translateY(-4px); box-shadow: 0 16px 42px rgba(0,0,0,0.35); border-color: rgba(255,255,255,0.16); }
+.card h3{
+  margin: 6px 0 8px; font-size: 16px; font-weight: 700; letter-spacing: .02em;
+}
+.type{
+  display: inline-block; font-size: 12px; color: var(--muted);
+  padding: 4px 8px; border: 1px solid var(--border); border-radius: 999px; margin-bottom: 8px;
+}
+.price{
+  font-size: 18px; font-weight: 800; margin: 8px 0 14px;
+  color: color-mix(in oklab, var(--accent) 70%, var(--text));
+}
+.card button{
+  width: 100%; border-radius: 12px;
+}

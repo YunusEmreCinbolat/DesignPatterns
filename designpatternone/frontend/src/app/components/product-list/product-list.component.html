@@ -1,0 +1,10 @@
+<section class="container">
+  <div class="grid">
+    <article *ngFor="let p of products" class="card">
+      <h3>{{ p.name }}</h3>
+      <div class="type">{{ p.type }}</div>
+      <div class="price">{{ p.price | number:'1.2-2' }} ₺</div>
+      <button class="btn btn-primary" (click)="add(p)">Sepete Ekle</button>
+    </article>
+  </div>
+</section>

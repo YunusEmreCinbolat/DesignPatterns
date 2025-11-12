@@ -1,0 +1,9 @@
+<div class="dashboard">
+  <h2>🏠 Akıllı Ev Kontrol Paneli</h2>
+  <div class="device-list">
+    <app-device-card
+      *ngFor="let d of devices"
+      [device]="d"
+    ></app-device-card>
+  </div>
+</div>
