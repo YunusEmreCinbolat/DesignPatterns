@@ -1,24 +1,42 @@
 package com.example.backend.controller;
 
 import com.example.backend.order.Order;
-import com.example.backend.order.OrderStatus;
 import com.example.backend.repo.OrderRepository;
 import com.example.backend.service.OrderService;
+import com.example.backend.service.OrderStatusService;
 import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/orders")
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final OrderService orderService;
+    private final OrderStatusService orderStatusService;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(
+            OrderRepository orderRepository,
+            OrderService orderService,
+            OrderStatusService orderStatusService
+    ) {
         this.orderRepository = orderRepository;
+        this.orderService = orderService;
+        this.orderStatusService = orderStatusService;
     }
 
     @PostMapping
     public Order createOrder(@RequestBody Order order) {
+
+        System.out.println("[OrderController] Sipariş alındı → " + order.getId());
+
+        // ✔ CHAIN OF RESPONSIBILITY (Sipariş oluşturma chain’i)
+        orderService.processOrder(order);
+
         orderRepository.save(order);
+
+        System.out.println("[OrderController] Sipariş kaydedildi → " + order.getId());
+
         return order;
     }
 
@@ -37,23 +55,17 @@ public class OrderController {
             throw new RuntimeException("Order not found: " + id);
         }
 
-        // COMPLETED ise artık ilerlemesin
-        if (order.getStatus() == OrderStatus.COMPLETED) {
-            return order; // aynen geri dön
-        }
+        System.out.println("\n----------------------------------------");
+        System.out.println("[OrderStatus] Şu anki durum → " + order.getStatus());
 
-        switch (order.getStatus()) {
-            case RECEIVED -> order.setStatus(OrderStatus.PREPARING);
-            case PREPARING -> order.setStatus(OrderStatus.SHIPPED);
-            case SHIPPED -> order.setStatus(OrderStatus.OUT_FOR_DELIVERY);
-            case OUT_FOR_DELIVERY -> order.setStatus(OrderStatus.DELIVERED);
-            case DELIVERED -> order.setStatus(OrderStatus.COMPLETED);
-            default -> { }
-        }
+        // ✔ CHAIN OF RESPONSIBILITY (Sipariş DURUM chain’i)
+        orderStatusService.nextStep(order);
+
+        System.out.println("[OrderStatus] Yeni durum → " + order.getStatus());
+        System.out.println("----------------------------------------\n");
 
         orderRepository.save(order);
 
         return order;
     }
-
 }
