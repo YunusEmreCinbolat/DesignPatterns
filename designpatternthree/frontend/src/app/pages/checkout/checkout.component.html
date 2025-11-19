@@ -1,1 +1,15 @@
-<p>checkout works!</p>
+<div class="container">
+  <h1 class="title">Ödeme</h1>
+
+  <!-- 2️⃣ Modern Detaylı Özet Kutusu -->
+  <div class="summary-box">
+    <h3>Sipariş Özeti</h3>
+
+    <p>Toplam Ürün: <b>{{ itemCount }}</b></p>
+    <p>Toplam Tutar: <b>{{ totalPrice | currency:"TRY" }}</b></p>
+
+    <button class="pay-btn" (click)="submit()" [disabled]="loading">
+      {{ loading ? "Sipariş Oluşturuluyor..." : "Siparişi Tamamla" }}
+    </button>
+  </div>
+</div>

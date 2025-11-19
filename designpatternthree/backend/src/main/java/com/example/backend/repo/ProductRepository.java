@@ -1,10 +1,10 @@
 package com.example.backend.repo;
 
-
 import com.example.backend.product.SingleProduct;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,5 +26,9 @@ public class ProductRepository {
 
     public SingleProduct findById(String id) {
         return store.get(id);
+    }
+
+    public Collection<SingleProduct> findAll() {
+        return store.values();
     }
 }

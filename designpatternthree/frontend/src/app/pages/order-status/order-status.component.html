@@ -1,0 +1,9 @@
+<div class="container" *ngIf="order">
+  <h1>Sipariş Durumu</h1>
+
+  <div class="status-box">
+    <h2>{{ order.status }}</h2>
+  </div>
+
+  <p class="info">Durum her 15s saniyede bir otomatik güncellenir.</p>
+</div>

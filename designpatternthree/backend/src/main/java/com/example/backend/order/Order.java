@@ -1,32 +1,50 @@
 package com.example.backend.order;
 
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Sipariş modeli.
- * Basit tuttuk: normalde burada kullanıcı, adres, ödeme bilgisi vs. de olur.
- */
 public class Order {
+
+    private static final AtomicLong ID_GENERATOR = new AtomicLong(1);
 
     private Long id;
     private List<OrderItem> items = new ArrayList<>();
+    private OrderStatus status = OrderStatus.RECEIVED;
     private double totalPrice;
-    private OrderStatus status = OrderStatus.PENDING;
 
-    // Örnek flag alanlar (handler'lar bunlara bakacak)
+    // handler’ların ihtiyacı olan alanlar
     private boolean paymentCompleted;
     private boolean notFraud;
     private boolean addressValid;
 
+    // reddetme için eklendi
+    private String rejectionReason;
+
     public Order() {
+        this.id = ID_GENERATOR.getAndIncrement();
     }
 
-    public Order(Long id) {
-        this.id = id;
+    public Order(List<OrderItem> items) {
+        this();
+        this.items = items;
+        calculateTotal();
     }
 
+    public void calculateTotal() {
+        this.totalPrice = items.stream()
+                .mapToDouble(i -> i.getPrice() * i.getQuantity())
+                .sum();
+    }
+
+    // ✨ SİPARİŞ REDDEDİLDİĞİNDE ÇAĞRILIR
+    public void markRejected(String reason) {
+        this.status = OrderStatus.REJECTED;
+        this.rejectionReason = reason;
+        this.paymentCompleted = false;
+    }
+
+    // GETTER / SETTER’lar
     public Long getId() {
         return id;
     }
@@ -35,32 +53,33 @@ public class Order {
         this.id = id;
     }
 
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
     public List<OrderItem> getItems() {
         return items;
     }
 
-    public void addItem(OrderItem item) {
-        this.items.add(item);
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+        calculateTotal();
     }
 
     public OrderStatus getStatus() {
         return status;
     }
 
-    public void markRejected() {
-        this.status = OrderStatus.REJECTED;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
-    public void markCompleted() {
-        this.status = OrderStatus.COMPLETED;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
     public boolean isPaymentCompleted() {
@@ -85,5 +104,9 @@ public class Order {
 
     public void setAddressValid(boolean addressValid) {
         this.addressValid = addressValid;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
     }
 }

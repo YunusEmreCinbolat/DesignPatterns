@@ -1,8 +1,11 @@
 package com.example.backend.order;
 
-
 public enum OrderStatus {
-    PENDING,
+    RECEIVED,
+    PREPARING,
+    SHIPPED,
+    OUT_FOR_DELIVERY,
+    DELIVERED,
     REJECTED,
     COMPLETED
 }

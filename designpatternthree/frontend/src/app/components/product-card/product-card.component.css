@@ -1,0 +1,30 @@
+.card {
+  background: #2ecc71; /* Yeşil */
+  padding: 22px;
+  border-radius: 14px;
+  text-align: center;
+  color: white; /* Yazılar beyaz */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.card button {
+  margin-top: 10px;
+  background: white;
+  color: #27ae60;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.card button:hover {
+  background: #ecf0f1;
+}

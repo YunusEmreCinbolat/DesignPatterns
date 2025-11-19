@@ -1,1 +1,25 @@
-<p>cart works!</p>
+<div class="container">
+  <h1 class="title">Sepetiniz</h1>
+
+  <div *ngIf="cart.length === 0" class="empty">
+    <p>Sepetiniz boş.</p>
+    <a routerLink="/">Alışverişe Devam Et</a>
+  </div>
+
+  <div class="cart-items" *ngIf="cart.length > 0">
+    <app-cart-item
+      *ngFor="let item of cart"
+      [item]="item"
+      (remove)="remove($event)"
+      (increase)="increase($event)"
+      (decrease)="decrease($event)"
+    ></app-cart-item>
+
+    <div class="summary">
+      <h2>Özet</h2>
+      <p class="total">Toplam: <b>{{ totalPrice | currency:"TRY" }}</b></p>
+
+      <button routerLink="/checkout" class="checkout-btn">Ödemeye Geç</button>
+    </div>
+  </div>
+</div>

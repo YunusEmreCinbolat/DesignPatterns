@@ -1,0 +1,27 @@
+.container {
+  text-align: center;
+  padding: 40px;
+}
+
+.status-box {
+  background: white;
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  .status-box {
+    background: #1e1e1e;
+    color: #eee;
+  }
+}
+
+.info {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}

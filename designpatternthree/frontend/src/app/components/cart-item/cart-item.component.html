@@ -1,0 +1,14 @@
+<div class="item">
+  <div>
+    <h3>{{ item.name }}</h3>
+    <p>{{ item.price | currency:"TRY" }}</p>
+  </div>
+
+  <div class="actions">
+    <button class="qty-btn" (click)="decrease.emit(item.id)">−</button>
+    <span class="qty">{{ item.qty }}</span>
+    <button class="qty-btn" (click)="increase.emit(item.id)">+</button>
+
+    <button class="remove-btn" (click)="remove.emit(item.id)">Sil</button>
+  </div>
+</div>

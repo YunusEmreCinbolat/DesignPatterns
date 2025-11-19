@@ -10,7 +10,7 @@ public class FraudHandler extends OrderHandler {
     protected boolean doHandle(Order order) {
         if (!order.isNotFraud()) {
             System.out.println("[FraudHandler] Fraud şüphesi. Sipariş reddedildi.");
-            order.markRejected();
+            order.markRejected("");
             return false;
         }
         System.out.println("[FraudHandler] Fraud kontrolü geçti.");

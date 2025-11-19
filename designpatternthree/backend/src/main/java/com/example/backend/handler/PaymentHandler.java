@@ -10,7 +10,7 @@ public class PaymentHandler extends OrderHandler {
     protected boolean doHandle(Order order) {
         if (!order.isPaymentCompleted()) {
             System.out.println("[PaymentHandler] Ödeme başarısız. Sipariş reddedildi.");
-            order.markRejected();
+            order.markRejected("");
             return false;
         }
         System.out.println("[PaymentHandler] Ödeme kontrolü geçti.");

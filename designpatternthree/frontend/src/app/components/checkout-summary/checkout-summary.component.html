@@ -1,0 +1,10 @@
+<div class="summary-box">
+  <h3>Sipariş Özeti</h3>
+
+  <p>Toplam Ürün: <b>{{ itemCount }}</b></p>
+  <p>Toplam Tutar: <b>{{ totalPrice | currency:"TRY" }}</b></p>
+
+  <button (click)="onCheckout()" [disabled]="loading">
+    {{ loading ? "Sipariş Oluşturuluyor..." : "Siparişi Tamamla" }}
+  </button>
+</div>

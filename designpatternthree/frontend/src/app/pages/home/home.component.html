@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="page-container">
+  <div class="top-bar">
+    <h2 class="title">Ürünler</h2>
+
+    <button class="cart-btn" routerLink="/cart">
+      🛒 Sepete Git <span class="count">{{ totalItems }}</span>
+
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Ürünler yükleniyor...</div>
+
+  <div class="grid">
+    <div class="card" *ngFor="let p of products">
+      <h3>{{ p.name }}</h3>
+      <p class="price">{{ p.price | currency:'TRY' }}</p>
+      <button class="add-btn" (click)="addToCart(p)">Sepete Ekle</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.summary-box {
+  padding: 16px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  margin-top: 20px;
+  background: #fafafa;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  margin-top: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #8cb7e0;
+}

@@ -1,1 +1,5 @@
-<p>product-card works!</p>
+<div class="card">
+  <h3>{{ product.name }}</h3>
+  <p>{{ product.price | currency: 'TRY' }}</p>
+  <button (click)="addToCart()">Sepete Ekle</button>
+</div>

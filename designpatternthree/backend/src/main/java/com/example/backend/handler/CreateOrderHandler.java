@@ -20,7 +20,7 @@ public class CreateOrderHandler extends OrderHandler {
             System.out.println("[CreateOrderHandler] Sipariş reddedildiği için kaydedilmeyecek.");
             return false;
         }
-        order.markCompleted();
+
         orderRepository.save(order);
         System.out.println("[CreateOrderHandler] Sipariş başarıyla oluşturuldu. Durum: COMPLETED");
         return true;

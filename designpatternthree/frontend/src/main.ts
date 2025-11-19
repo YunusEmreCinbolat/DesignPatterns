@@ -1,14 +1,11 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';           // ⬅️ BUNU EKLE
-import { provideRouter, Routes } from '@angular/router';
-import { App } from './app/app';
+import { AppComponent } from './app/app';
+import { appConfig } from './app/app.config';
+import { provideHttpClient } from '@angular/common/http';
 
-const routes: Routes = [
-];
-
-bootstrapApplication(App, {
+bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(),                                             // ⬅️ BUNU EKLE
-    provideRouter(routes)
+    provideHttpClient(),
+    ...appConfig.providers  // APP.CONFIG ROUTER'I KULLAN!
   ]
 }).catch(err => console.error(err));

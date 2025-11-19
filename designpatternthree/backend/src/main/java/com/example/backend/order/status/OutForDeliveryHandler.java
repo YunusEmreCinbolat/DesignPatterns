@@ -1,0 +1,18 @@
+package com.example.backend.order.status;
+
+import com.example.backend.order.Order;
+import com.example.backend.order.OrderStatus;
+import org.springframework.stereotype.Component;
+
+@Component
+public class OutForDeliveryHandler extends BaseOrderStatusHandler {
+
+    @Override
+    public void handle(Order order) {
+        if (order.getStatus() == OrderStatus.OUT_FOR_DELIVERY) {
+            order.setStatus(OrderStatus.DELIVERED);
+            return;
+        }
+        forward(order);
+    }
+}
