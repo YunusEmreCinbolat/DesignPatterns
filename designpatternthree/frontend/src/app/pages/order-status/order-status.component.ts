@@ -8,12 +8,12 @@ import { OrderService } from '../../services/order.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './order-status.component.html',
-  styleUrls: ['./order-status.component.css']
+  styleUrls: ['./order-status.component.css'],
 })
 export class OrderStatusComponent implements OnInit, OnDestroy {
-
   order: any;
   intervalId: any;
+  orderId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,25 +21,36 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.params['id']);
+    this.orderId = Number(this.route.snapshot.params['id']);
 
-    // İlk sipariş yükleme
-    this.loadOrder(id);
+    // İlk yükleme
+    this.loadStatus();
 
-    // Her 30 saniyede bir statü ilerlet
+    // Her 30 saniyede bir ilerlet
     this.intervalId = setInterval(() => {
-      this.orderService.nextStatus(id).subscribe({
-        next: res => this.order = res,
-        error: err => console.error(err)
-      });
-    }, 7000);
+      this.progressStatus();
+    }, 3000);
   }
 
-  loadOrder(id: number) {
-    this.orderService.getOrder(id).subscribe({
-      next: res => this.order = res,
-      error: err => console.error(err)
+  loadStatus() {
+    this.orderService.getOrder(this.orderId).subscribe((res) => {
+      this.order = res;
+      this.stopIfCompleted();
     });
+  }
+
+  progressStatus() {
+    this.orderService.nextStatus(this.orderId).subscribe((res) => {
+      this.order = res;
+      this.stopIfCompleted();
+    });
+  }
+
+  stopIfCompleted() {
+    if (this.order.status === 'DELIVERED' || this.order.status === 'COMPLETED') {
+      console.log("✅ Sipariş tamamlandı, interval durduruldu.");
+      clearInterval(this.intervalId);
+    }
   }
 
   ngOnDestroy() {

@@ -36,6 +36,12 @@ export class CheckoutComponent implements OnInit {
     return this.cart.reduce((t, i) => t + i.qty * i.price, 0);
   }
 
+  get totalPriceWithTax() {
+  const taxRate = 0.20; // %20 KDV
+  return this.totalPrice + (this.totalPrice * taxRate);
+}
+
+
   submit() {
     this.loading = true;
 

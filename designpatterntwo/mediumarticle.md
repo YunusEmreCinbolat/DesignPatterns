@@ -17,9 +17,9 @@ Bu projede tam da bu mimariyi sağlamak için üç önemli yazılım tasarım de
 
 ---
 
-# 🟦 1. State Pattern — Davranışı Durumlara Bölerek Yönetmek
+#  1. State Pattern — Davranışı Durumlara Bölerek Yönetmek
 
-## 🎯 Problem
+##  Problem
 
 Gerçek bir cihaz birden fazla çalışma moduna sahiptir. Örnek: **ON**, **OFF**, **STANDBY**.  
 Ve her bir modda aynı komuta verdiği tepki farklıdır.
@@ -43,7 +43,7 @@ Bu yapı birkaç durum eklenince bile yönetilemez hâle gelir.
 
 ---
 
-## ✔ Çözüm: Durumları ayrı sınıflara ayırmak
+##  Çözüm: Durumları ayrı sınıflara ayırmak
 
 Projede kullanılan **State arayüzü**:
 
@@ -59,7 +59,7 @@ Bu mimari, davranışı **durumun içine gömmek** olarak bilinir.
 
 ---
 
-## 🟢 OnState (Cihaz Açık)
+##  OnState (Cihaz Açık)
 
 ```java
 public class OnState implements State {
@@ -76,14 +76,14 @@ public class OnState implements State {
 }
 ```
 
-✔ Açıklama:
+ Açıklama:
 
 - Cihaz zaten açık olduğu için `turnOn()` yalnızca bilgi verir.
 - `turnOff()` cihazın durumunu değiştirir → **Davranış değişikliği tamamen state değişimine bağlıdır.**
 
 ---
 
-## 🔴 OffState (Cihaz Kapalı)
+##  OffState (Cihaz Kapalı)
 
 ```java
 public class OffState implements State {
@@ -107,7 +107,7 @@ public class OffState implements State {
 
 ---
 
-## 🟡 StandbyState (Uyku Modu)
+##  StandbyState (Uyku Modu)
 
 ```java
 public class StandbyState implements State {
@@ -132,7 +132,7 @@ public class StandbyState implements State {
 
 ---
 
-## 📌 State Pattern’in Sağladıkları
+##  State Pattern’in Sağladıkları
 
 - If-else blokları tamamen ortadan kalktı.  
 - Her durum kendi davranışını yönetir → **Davranış = Durum**  
@@ -143,7 +143,7 @@ public class StandbyState implements State {
 
 ---
 
-# 🟪 2. Decorator Pattern — Cihazlara Dinamik Özellik Eklemek
+#  2. Decorator Pattern — Cihazlara Dinamik Özellik Eklemek
 
 Akıllı cihazlar sadece “aç/kapa” yapan basit yapılar değil; çoğu zaman ek özelliklerle zenginleştirilmiş hâlde çalışıyorlar. Örneğin bir cihaz:
 
@@ -156,7 +156,7 @@ Bu özelliklerin hepsi aynı “cihaz” üzerinde, farklı kombinasyonlarda kul
 
 > “Bu kadar farklı kombinasyonu, miras (inheritance) kullanarak nasıl yöneteceğim?”
 
-## 🎯 Problem — Miras ile Özellik Yönetmenin Çıkmazı
+##  Problem — Miras ile Özellik Yönetmenin Çıkmazı
 
 Diyelim ki cihazımız `Light` sınıfı olsun. Eklemek istediğimiz özellikler:
 
@@ -181,16 +181,16 @@ LightWithTimerAndLoggerAndEnergySaver
 Her yeni özellik veya kombinasyon, yeni bir sınıf demek.
 Bu da şu sorunlara yol açıyor:
 
-* ❌ **Class Explosion**: Kombinasyonlar arttıkça sınıf sayısı kontrolden çıkıyor.
-* ❌ Esneklik kaybı: Yeni bir özellik eklemek için birçok sınıfı yeniden yazman gerekiyor.
-* ❌ Tekrar eden kod: Aynı davranış farklı sınıflarda tekrar tekrar yazılıyor.
-* ❌ Bakım zorluğu: Hangi sınıfın hangi özellik kombinasyonuna sahip olduğunu takip etmek zorlaşıyor.
+*  **Class Explosion**: Kombinasyonlar arttıkça sınıf sayısı kontrolden çıkıyor.
+*  Esneklik kaybı: Yeni bir özellik eklemek için birçok sınıfı yeniden yazman gerekiyor.
+*  Tekrar eden kod: Aynı davranış farklı sınıflarda tekrar tekrar yazılıyor.
+*  Bakım zorluğu: Hangi sınıfın hangi özellik kombinasyonuna sahip olduğunu takip etmek zorlaşıyor.
 
 Bu problemi çözmek için, projede **Decorator Pattern** tercih edildi.
 
 ---
 
-## ✔ Çözüm: Cihazları “Sarmak” (Wrap) — Katmanlı Özellik Mimarisi
+##  Çözüm: Cihazları “Sarmak” (Wrap) — Katmanlı Özellik Mimarisi
 
 Decorator Pattern’in temel fikri şu:
 
@@ -209,7 +209,7 @@ Bu sayede:
 
 ---
 
-## 🧱 DeviceDecorator (Temel Dekoratör) — Ortak Altyapı
+##  DeviceDecorator (Temel Dekoratör) — Ortak Altyapı
 
 Projede tüm dekoratörlerin miras aldığı temel sınıf şu şekilde:
 
@@ -267,7 +267,7 @@ Bu yapı, tüm dekoratörlerin üzerine inşa edildiği iskelet.
 
 ---
 
-## 🔋 EnergySaverDecorator — Enerji Tasarrufu Katmanı
+##  EnergySaverDecorator — Enerji Tasarrufu Katmanı
 
 Enerji tasarrufu modunu cihaza ekleyen dekoratör şu şekilde:
 
@@ -308,7 +308,7 @@ Bu sayede:
 
 ---
 
-## ⏱ TimerDecorator — Zamanlayıcı Katmanı
+##  TimerDecorator — Zamanlayıcı Katmanı
 
 Zamanlayıcı özelliği ekleyen dekoratör:
 
@@ -347,7 +347,7 @@ TV, klima veya ışıklarda sık görülen “X dakika sonra otomatik kapan” �
 
 ---
 
-## 🧩 Çoklu Decorator Zinciri
+##  Çoklu Decorator Zinciri
 
 Projede bir TV cihazına hem enerji tasarrufu modu hem de zamanlayıcı eklemek için şu yapı kullanılıyor:
 
@@ -367,10 +367,10 @@ Bunu parçalayalım:
 
 Bu sayede:
 
-* ✔ TV aynı anda **Energy Saver + Timer** özelliklerine sahip oluyor.
-* ✔ TV’nin kendi kodu hiçbir ek özellikten **haberdar değil**.
-* ✔ Özellikler tamamen **dekoratörler üzerinden** yönetiliyor.
-* ✔ Farklı kombinasyonlar için yeni sınıf yazmaya gerek kalmıyor.
+*  TV aynı anda **Energy Saver + Timer** özelliklerine sahip oluyor.
+*  TV’nin kendi kodu hiçbir ek özellikten **haberdar değil**.
+*  Özellikler tamamen **dekoratörler üzerinden** yönetiliyor.
+*  Farklı kombinasyonlar için yeni sınıf yazmaya gerek kalmıyor.
 
 Örneğin yarın yeni bir `LoggingDecorator` yazarsan:
 
@@ -386,7 +386,7 @@ gibi bir zincir ile, hem loglama, hem timer, hem enerji tasarrufu davranışın�
 
 ---
 
-## 🧠 Mimari Açıdan Kazanımlar
+##  Mimari Açıdan Kazanımlar
 
 Decorator Pattern sayesinde:
 
@@ -407,7 +407,7 @@ Aşağıdaki metni direkt olarak yazındaki mevcut Command bölümünün yerine 
 
 ---
 
-# 🟩 3. Command Pattern — Kullanıcı İşlemlerini Komut Nesnesine Dönüştürmek
+#  3. Command Pattern — Kullanıcı İşlemlerini Komut Nesnesine Dönüştürmek
 
 Akıllı cihazlarla etkileşimde kullanıcıların gerçekleştirdiği her işlem (turn on, turn off, mode change, schedule action vb.) aslında sistem içinde önemli bir olaydır. Bu olaylar çoğu IoT mimarisinde:
 
@@ -439,7 +439,7 @@ Bu mimari özellikle **IoT sistemlerinde standardın ta kendisidir**.
 
 ---
 
-## 🎯 Problem — İşlemleri tek bir yöntem ile yönetmenin sınırları
+##  Problem — İşlemleri tek bir yöntem ile yönetmenin sınırları
 
 Geleneksel yaklaşımda bir cihazı açmak veya kapatmak için doğrudan:
 
@@ -467,7 +467,7 @@ Bu nedenle kullanılan en doğru yaklaşım:
 
 ---
 
-# ✔ Komut Arayüzü — Tüm Komutların Temeli
+#  Komut Arayüzü — Tüm Komutların Temeli
 
 Projede kullanılan komut arayüzü oldukça yalın fakat güçlüdür:
 
@@ -504,7 +504,6 @@ public class TurnOnCommand implements Command {
 }
 ```
 
-### ✔ Derin Açıklama:
 
 * Komut nesnesi oluşturulurken hedef cihaz içeride tutulur.
 * `execute()` çağrıldığında bu cihaz açılır.
@@ -525,7 +524,7 @@ Bu Command mimarisi sayesinde **aynı komut hem backend hem IoT cihazda** yoruml
 
 ---
 
-# 🔌 TurnOffCommand — Cihaz Kapatma Komutu
+# TurnOffCommand — Cihaz Kapatma Komutu
 
 ```java
 public class TurnOffCommand implements Command {
@@ -553,7 +552,7 @@ Bu sayede:
 
 ---
 
-# 🧠 Command Nesneleri Neden Bu Kadar Güçlü?
+#  Command Nesneleri Neden Bu Kadar Güçlü?
 
 Command nesnesi:
 
@@ -579,7 +578,7 @@ Bu işlemlerin tümü **Command Pattern ile yapılır.**
 
 ---
 
-# 🗂 Invoker — Komutların Yürütücüsü
+#  Invoker — Komutların Yürütücüsü
 
 ```java
 public class Invoker {
@@ -596,7 +595,7 @@ public class Invoker {
 }
 ```
 
-### 💡 Invoker’ın rolü nedir?
+### Invoker’ın rolü nedir?
 
 Invoker:
 
@@ -615,37 +614,25 @@ Yani bu yapı sadece backend değil, tüm Smart Home sistem mimarisinde kritik b
 
 ---
 
-# 🧩 Command Pattern ile Yapılabilen Gelişmiş Senaryolar
+#  Command Pattern ile Yapılabilen Gelişmiş Senaryolar
 
 Aşağıdaki özellikler Command Pattern sayesinde **çok kolay ve temiz şekilde** uygulanabilir:
 
-### 🔄 1. Undo / Redo
+###  1. Undo / Redo
 
 History listesinden son komutu çekip ters işlem yapılabilir.
 
-### 📦 2. Makro Komutlar
+###  2. Makro Komutlar
 
 Bir komut içinde başka komutları zincirleyebilirsin → “evden çıkış modu”.
 
-### 🕒 3. Zamanlanmış komutlar
+###  3. Zamanlanmış komutlar
 
 “5 dakika sonra ışığı kapat” → TimerDecorator ile birleşince inanılmaz güçlü olur.
 
-### ☁ 4. Buluta komut gönderme
-
-Command JSON olarak serialize edilip MQTT/WebSocket ile IoT cihazına gönderilebilir.
-
-### 🎛 5. UI üzerinden otomasyon oluşturma
-
-Kullanıcı arayüzünde sürükle-bırak ile otomasyon tasarlamak Command mantığıyla yapılır.
-
-### 🧪 6. Test kolaylığı
-
-Her komut tek başına test edilebilir → **unit test yazmak çok kolaydır.**
-
 ---
 
-# 🏁 Sonuç ve Kapanış (Genişletilmiş)
+# Sonuç ve Kapanış
 
 Bu projede birlikte kullanılan **State**, **Decorator** ve **Command** tasarım desenleri; modern IoT ve akıllı cihaz yazılımlarında karşılaşılan tüm davranışsal zorlukları çözmek için mükemmel bir mimari bütünlük sağlar. State Pattern cihazların farklı iç durumlarda nasıl hareket ettiğini net ve sürdürülebilir bir şekilde modelleyerek kod karmaşasını ortadan kaldırır. Decorator Pattern, cihazların yeteneklerini sınırsız kombinasyonlarla genişletmeye olanak tanır; enerji tasarrufu, zamanlayıcı, loglama gibi özellikler dinamik olarak eklenebilir. Command Pattern ise kullanıcı eylemlerinin nesneleştirilmesini sağlayarak geçmiş yönetimi, geri alma mekanizmaları, makro sistemleri ve otomasyon senaryolarının kolayca uygulanmasına kapı açar.
 
