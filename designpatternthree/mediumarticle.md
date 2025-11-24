@@ -1,6 +1,6 @@
- # Composite, Proxy ve Chain of Responsibility ile Modern Sipariş Yönetimi
+# Composite, Proxy ve Chain of Responsibility ile Modern Sipariş Yönetimi
 
-# Giriş
+## Giriş
 Günümüzde e-ticaret sistemlerinin artan karmaşıklığı, ürün modellemeyi ve sipariş akışını yönetmeyi zorlaştırmaktadır.
 Gerçek bir sipariş oluşturma süreci onlarca farklı iş kuralı içerir.
 Aynı şekilde ürün tarafında da tekil ürünler, paketler, setler ve iç içe geçmiş kombinasyonlar bulunabilir.
