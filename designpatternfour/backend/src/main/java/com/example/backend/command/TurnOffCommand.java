@@ -1,4 +1,16 @@
 package com.example.backend.command;
 
-public class TurnOffCommand {
+
+import com.example.backend.device.Device;
+
+public class TurnOffCommand implements Command {
+
+    private final Device device;
+
+    public TurnOffCommand(Device device) {
+        this.device = device;
+    }
+
+    @Override
+    public void execute() { device.turnOff(); }
 }

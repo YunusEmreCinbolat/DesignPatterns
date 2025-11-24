@@ -1,4 +1,6 @@
 package com.example.backend.command;
 
-public class Command {
+
+public interface Command {
+    void execute();
 }

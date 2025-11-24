@@ -1,4 +1,8 @@
 package com.example.backend.device;
 
-public class DeviceType {
+
+public enum DeviceType {
+    LIGHT,
+    AC,
+    DOOR
 }
