@@ -23,7 +23,7 @@ Bu tasarım Liskov’un Yerine Geçme İlkesine birebir uyumludur.
 ---
 ## 1.1 ProductComponent 
 Bu interface, tüm ürün bileşenlerinin sahip olması gereken metotları tanımlar.
-Aşağıda projenin gerçek kodundan alınmış hâlidir
+
 ```java
 public interface ProductComponent {
     String getName();
@@ -39,7 +39,7 @@ Böylece ürün ağaçları üzerinde recursive işlemler uygulanabilir.
 ## 1.2 SingleProduct – Composite İçindeki Yaprak
 SingleProduct sınıfı, Composite Pattern’in Leaf (Yaprak) rolüdür.
 İçinde alt eleman bulunmaz ve fiyatı doğrudan geri döndürür.
-Projedeki gerçek kod şu şekildedir
+
 ```java
 public class SingleProduct implements ProductComponent {
     private final String name;
@@ -66,7 +66,7 @@ ProductBundle Composite Pattern’in Composite tarafını temsil eder.
 İçinde birden fazla ProductComponent barındırabilir.
 Bu bileşenler ister SingleProduct ister başka bir ProductBundle olabilir.
 Böylece iç içe geçmiş çok seviyeli ürün ağaçları oluşturulabilir.
-Projenin gerçek kodu aşağıdaki gibidir
+
 ```java
 public class ProductBundle implements ProductComponent {
     private final String name;
@@ -108,8 +108,7 @@ public class ProductBundle implements ProductComponent {
  Bu yaklaşım performansı ciddi şekilde artırır.
  Proxy Pattern burada lazy-loading mantığıyla uygulanmıştır.
  ---
- ## 2.1 PriceCacheProxy – Gerçek Kod Analizi
- Projede kullanılan PriceCacheProxy’nin kodu şu şekildedir
+ ## 2.1 PriceCacheProxy
  ```java
  public class PriceCacheProxy implements ProductComponent {
      private final ProductComponent realProduct;
@@ -155,7 +154,7 @@ public class ProductBundle implements ProductComponent {
  ---
  ## 3. Chain of Responsibility Pattern – Sipariş İşleme Zinciri
  Chain of Responsibility, bir işlemi ardışık adımlara bölmek için kullanılan bir tasarım desenidir.
- DesignPatternThree projesinde sipariş oluşturma süreci tamamen Chain yapısıyla düzenlenmiştir.
+ bu proje içerisinde sipariş oluşturma süreci tamamen Chain yapısıyla düzenlenmiştir.
  Bu sayede her iş kuralı kendi handler sınıfında bulunur.
  Handler’lar birbirine zincir şeklinde bağlanır.
  Sipariş, zincirin en başından içeri girer ve adımlar sırayla uygulanır.
@@ -163,7 +162,6 @@ public class ProductBundle implements ProductComponent {
  Bu yaklaşım hem temizdir hem de genişletilebilirliği son derece kolaylaştırır.
  ---
  ## 3.1 OrderHandler – Tüm Handlerların Temel Sınıfı
- Aşağıda projenin gerçek OrderHandler sınıfı görülmektedir
  ```java
  public abstract class OrderHandler {
      protected OrderHandler next;
@@ -244,7 +242,6 @@ public class ProductBundle implements ProductComponent {
  ---
  ## 3.5 TaxHandler – KDV Hesabı
  Stok kontrolünden sonra siparişin vergisi hesaplanır.
- Türkiye’de KDV genelde %20 olduğundan örnek hesaplama şu şekildedir
  ```java
  public class TaxHandler extends OrderHandler {
      @Override
@@ -264,7 +261,6 @@ public class ProductBundle implements ProductComponent {
  ---
  ## 3.6 DiscountHandler – Büyük Sipariş İndirimi
  DiscountHandler belirli bir eşik üzerinde indirim uygular.
- Projedeki gerçek örnek
  ```java
  public class DiscountHandler extends OrderHandler {
      @Override
@@ -285,7 +281,6 @@ public class ProductBundle implements ProductComponent {
  ---
  ## 3.7 ShippingHandler – Kargo Ücreti Uygulaması
  Kargo, toplam fiyat belirli bir eşik altındaysa eklenen bir maliyettir.
- Kod şu şekildedir
  ```java
  public class ShippingHandler extends OrderHandler {
      @Override
@@ -394,7 +389,7 @@ public class ProductBundle implements ProductComponent {
  ```
  Bu handler, siparişin ilk durumdan ikinci duruma geçişini kontrol eder.
  ---
- ## 4.4 PreparingHandler – Hazırlanıyor
+ ## 4.4 PreparingHandler – Sipariş Hazırlanıyor
  ```java
  public class PreparingHandler extends BaseOrderStatusHandler {
      @Override
@@ -496,7 +491,7 @@ Zincir, final durum olan DELIVERED aşamasına kadar ilerler.
 Bu endpoint, gerçek dünyada sipariş takip sistemlerinin kalbini temsil eder.
 ---
 ## 6. Genel Mimari Değerlendirme
-DesignPatternThree, üç büyük tasarım desenini tek bir modern sipariş yönetim sisteminde birleştirir.
+Bu proje, üç büyük tasarım desenini tek bir modern sipariş yönetim sisteminde birleştirir.
 Composite Pattern → Ürünlerin ağaç yapısıyla modellenmesini sağlar.
 Proxy Pattern → Fiyat hesaplamasında performans optimizasyonu getirir.
 Chain of Responsibility → Sipariş akışını ve sipariş durum değişikliklerini adımlara ayırır.
