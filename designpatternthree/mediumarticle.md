@@ -1,7 +1,4 @@
  # DesignPatternThree – Composite, Proxy ve Chain of Responsibility ile Modern Sipariş Yönetimi
-Bu makale, DesignPatternThree projesini tamamen yeniden yazılmış profesyonel bir teknik dokümantasyon olarak sunar.
- Amaç, projede kullanılan üç ana tasarım desenini hem teorik hem de kod tabanlı bir perspektifte açıklamaktır.
-4: Bu desenler: Composite Pattern, Proxy Pattern ve Chain of Responsibility Pattern’dir.
 7: ---
 8: ## Giriş
 9: Günümüzde e-ticaret sistemlerinin artan karmaşıklığı, ürün modellemeyi ve sipariş akışını yönetmeyi zorlaştırmaktadır.
