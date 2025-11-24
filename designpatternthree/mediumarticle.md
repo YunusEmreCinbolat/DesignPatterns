@@ -15,13 +15,13 @@ Composite Pattern, “bütün–parça” ilişkisini tek bir soyutlama üzerind
 Bu desen özellikle ürün yapılandırmalarında sıklıkla kullanılır.
 Tasarım, hem tekil hem de bileşik ürünlerin aynı interface üzerinden yönetilebilmesini sağlar.
 Bu da sistemde önemli bir esneklik ve bütünlük sağlar.
-DesignPatternThree içindeki Composite yapısı, `ProductComponent` interface’i ile başlar.
+bu proje içindeki Composite yapısı, `ProductComponent` interface’i ile başlar.
 Tüm ürün türleri bu interface’i implement eder.
 Böylece SingleProduct, ProductBundle veya gelecekte eklenebilecek başka herhangi bir ürün türü aynı tip olarak davranır.
 Bu tasarım Liskov’un Yerine Geçme İlkesine birebir uyumludur.
 Çünkü her ürün bileşeni, beklenen davranışı sorunsuz şekilde yerine getirir.
 ---
-## 1.1 ProductComponent – Ortak Sözleşme
+## 1.1 ProductComponent 
 Bu interface, tüm ürün bileşenlerinin sahip olması gereken metotları tanımlar.
 Aşağıda projenin gerçek kodundan alınmış hâlidir
 ```java
@@ -153,7 +153,7 @@ public class ProductBundle implements ProductComponent {
  - Davranış genişletme çok kolay hâle gelir.
  Ayrıca Proxy Pattern, sistemde gelecekte yeni optimizasyonlar eklemeyi de kolaylaştırır.
  ---
- ## 3. Chain of Responsibility Pattern – Sipariş İşleme Boru Hattı
+ ## 3. Chain of Responsibility Pattern – Sipariş İşleme Zinciri
  Chain of Responsibility, bir işlemi ardışık adımlara bölmek için kullanılan bir tasarım desenidir.
  DesignPatternThree projesinde sipariş oluşturma süreci tamamen Chain yapısıyla düzenlenmiştir.
  Bu sayede her iş kuralı kendi handler sınıfında bulunur.
@@ -342,7 +342,7 @@ public class ProductBundle implements ProductComponent {
  Sipariş oluşturma süreci tamamen modüler hâle getirilmiştir.
  Bu da gerçek dünyada karşılaşılacak tüm iş senaryolarına kolay uyum sağlar.
   ## 4. Sipariş Durum Yönetimi – İkinci Chain of Responsibility
- DesignPatternThree yalnızca sipariş oluşturmayı değil, siparişin durum yaşam döngüsünü de Chain of Responsibility ile yönetir.
+ bu proje yalnızca sipariş oluşturmayı değil, siparişin durum yaşam döngüsünü de Chain of Responsibility ile yönetir.
  Bu ikinci chain, siparişin RECEIVED → PREPARING → SHIPPED → OUT_FOR_DELIVERY → DELIVERED şeklinde ilerlemesini sağlar.
  Bu mimari sayesinde sipariş durum geçişleri modüler bir hâle gelir.
  Durum işlemleri kontrol edilebilir, genişletilebilir ve test edilebilir olur.
@@ -449,8 +449,8 @@ public class ProductBundle implements ProductComponent {
      }
  }
  ```
-469 Bu final handler siparişin artık tamamlandığını belirtir.
-470 Daha fazla ilerleme olmadığı için zincir burada durur.
+Bu final handler siparişin artık tamamlandığını belirtir.
+Daha fazla ilerleme olmadığı için zincir burada durur.
 ---
 ## 4.8 OrderStatusService – Durum Zincirinin Kurulması
 Bu service tüm durum handler’larını birbirine bağlar.
