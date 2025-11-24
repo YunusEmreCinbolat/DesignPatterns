@@ -5,7 +5,7 @@ Günümüzde e-ticaret sistemlerinin artan karmaşıklığı, ürün modellemeyi
 Gerçek bir sipariş oluşturma süreci onlarca farklı iş kuralı içerir.
 Aynı şekilde ürün tarafında da tekil ürünler, paketler, setler ve iç içe geçmiş kombinasyonlar bulunabilir.
 Bu nedenle sağlam bir yazılım mimarisi tasarlamak kritik öneme sahiptir.
-DesignPatternThree projesi, bu ihtiyaca cevap veren örnek bir mimari sunar.
+bu proje, bu ihtiyaca cevap veren örnek bir mimari sunar.
 Ürün modellemesi Composite Pattern ile yapılmış, pahalı fiyat hesaplamaları Proxy Pattern ile optimize edilmiştir.
 Ayrıca sipariş oluşturma ve sipariş durum geçişleri Chain of Responsibility Pattern ile yönetilmiştir.
 Böylece uygulama hem genişletilebilir hem de yönetilebilir bir hâle gelmektedir.
