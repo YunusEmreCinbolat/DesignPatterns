@@ -1,0 +1,22 @@
+.builder {
+  background: #0f172a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 280px;
+  color: white;
+}
+
+label {
+  margin-top: 8px;
+  display: block;
+}
+
+button {
+  margin-top: 12px;
+  padding: 0.5rem 1rem;
+  background: #22c55e;
+  border: none;
+  color: black;
+  font-weight: bold;
+  border-radius: 6px;
+}

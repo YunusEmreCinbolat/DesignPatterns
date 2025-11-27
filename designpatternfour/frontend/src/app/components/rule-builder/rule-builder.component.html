@@ -1,0 +1,40 @@
+<div class="builder">
+  <h2>Automation Rule Builder</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <label>Sensor</label>
+    <select [(ngModel)]="sensor" name="sensor">
+      <option value="TEMPERATURE">Temperature</option>
+      <option value="MOTION">Motion</option>
+    </select>
+
+    <label>Operator</label>
+    <select [(ngModel)]="operator" name="operator">
+      <option>> </option>
+      <option>< </option>
+      <option>= </option>
+    </select>
+
+    <label>Value</label>
+    <input type="number" [(ngModel)]="value" name="value" />
+
+    <label>Action</label>
+    <select [(ngModel)]="action" name="action">
+      <option value="TURN_ON">Turn On</option>
+      <option value="TURN_OFF">Turn Off</option>
+    </select>
+
+    <label>Device</label>
+    <select [(ngModel)]="deviceType" name="deviceType">
+      <option value="LIGHT">Light</option>
+      <option value="AC">AC</option>
+      <option value="DOOR">Door</option>
+    </select>
+
+    <button type="submit">Execute Rule</button>
+  </form>
+
+  <button (click)="getEnergyReport()">Get Energy Report</button>
+
+  <p *ngIf="lastResponse">{{ lastResponse }}</p>
+</div>

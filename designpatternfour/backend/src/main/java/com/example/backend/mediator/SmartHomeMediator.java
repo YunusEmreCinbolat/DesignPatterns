@@ -7,5 +7,5 @@ import com.example.backend.device.DeviceType;
 public interface SmartHomeMediator {
     void registerDevice(Device device);
     Device getDevice(String name);
-    void sendCommand(DeviceType type, boolean turnOn);
+    String sendCommand(DeviceType type, boolean turnOn);
 }

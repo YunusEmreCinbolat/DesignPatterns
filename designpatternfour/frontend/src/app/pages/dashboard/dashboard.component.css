@@ -1,0 +1,9 @@
+.dashboard {
+  display: flex;
+  gap: 40px;
+}
+
+.devices-grid {
+  display: flex;
+  gap: 20px;
+}

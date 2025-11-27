@@ -1,0 +1,19 @@
+<div class="card">
+  <h3>{{ device.name }}</h3>
+  <p class="type">{{ device.type }}</p>
+
+  <p>
+    Status:
+    <span [class.on]="device.isOn" [class.off]="!device.isOn">
+      {{ statusText }}
+    </span>
+  </p>
+
+  <div class="icon">
+    <ng-container [ngSwitch]="device.type">
+      <div *ngSwitchCase="DeviceType.LIGHT">💡</div>
+      <div *ngSwitchCase="DeviceType.AC">🌬️</div>
+      <div *ngSwitchCase="DeviceType.DOOR">🚪</div>
+    </ng-container>
+  </div>
+</div>

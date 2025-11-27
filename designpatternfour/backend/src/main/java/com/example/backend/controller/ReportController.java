@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/reports")
@@ -20,8 +21,17 @@ public class ReportController {
 
     @GetMapping("/energy")
     public ResponseEntity<?> energy() {
-        DeviceVisitor visitor = new EnergyReportVisitor();
+
+        EnergyReportVisitor visitor = new EnergyReportVisitor();
         devices.forEach(d -> d.accept(visitor));
-        return ResponseEntity.ok("Energy report generated");
+        System.out.println("[VISITOR] Energy report generated");
+
+        return ResponseEntity.ok(
+                Map.of(
+                        "status", "success",
+                        "report", visitor.getReport()
+                )
+        );
     }
+
 }

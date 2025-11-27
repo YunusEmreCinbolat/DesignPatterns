@@ -1,0 +1,10 @@
+<div class="dashboard">
+  <app-rule-builder (ruleExecuted)="onRuleExecuted($event)"></app-rule-builder>
+
+  <div class="devices-grid">
+    <app-device-card
+      *ngFor="let d of devices"
+      [device]="d"
+    ></app-device-card>
+  </div>
+</div>

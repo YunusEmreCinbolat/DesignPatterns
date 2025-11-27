@@ -6,18 +6,32 @@ import com.example.backend.device.Light;
 
 public class EnergyReportVisitor implements DeviceVisitor {
 
+    private final StringBuilder report = new StringBuilder();
+
     @Override
     public void visitLight(Light light) {
-        System.out.println("[Energy] Light → " + (light.isOn() ? "10W" : "0W"));
+        String log = "[VISITOR] Energy check LIGHT (" + light.getName() + ") → " +
+                (light.isOn() ? "10W" : "0W");
+        System.out.println(log);
+        report.append(log).append("\n");
     }
 
     @Override
     public void visitAC(AC ac) {
-        System.out.println("[Energy] AC → " + (ac.isOn() ? "1200W" : "0W"));
+        String log = "[VISITOR] Energy check AC (" + ac.getName() + ") → " +
+                (ac.isOn() ? "1200W" : "0W");
+        System.out.println(log);
+        report.append(log).append("\n");
     }
 
     @Override
     public void visitDoor(Door door) {
-        System.out.println("[Energy] Door → 0W");
+        String log = "[VISITOR] Energy check DOOR (" + door.getName() + ") → 0W";
+        System.out.println(log);
+        report.append(log).append("\n");
+    }
+
+    public String getReport() {
+        return report.toString();
     }
 }

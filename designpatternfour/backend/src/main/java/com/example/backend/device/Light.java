@@ -1,14 +1,14 @@
 package com.example.backend.device;
 
 import com.example.backend.memento.DeviceSnapshot;
+import com.example.backend.visitor.DeviceVisitor;
 
-public class Light implements Device {
+public class Light extends Device {
 
     private boolean on = false;
-    private final String name;
 
     public Light(String name) {
-        this.name = name;
+        super(name);
     }
 
     @Override

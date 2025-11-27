@@ -1,10 +1,11 @@
 package com.example.backend.interpreter;
 
-
 import com.example.backend.device.DeviceType;
 import com.example.backend.interpreter.dto.RuleRequest;
 import com.example.backend.mediator.SmartHomeMediator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RuleInterpreterService {
 
     private final SmartHomeMediator mediator;
@@ -13,22 +14,38 @@ public class RuleInterpreterService {
         this.mediator = mediator;
     }
 
-    public void evaluateAndExecute(RuleRequest rule, Context ctx) {
+    public String evaluateAndExecute(RuleRequest rule, Context ctx) {
 
-        boolean conditionMet = false;
+        System.out.println("Interpreter: evaluating rule → " + rule);
 
-        if ("TEMPERATURE".equals(rule.sensor()) && ">".equals(rule.operator())) {
-            conditionMet = ctx.getTemperature() > rule.value();
+        boolean condition = false;
+
+        // TEMPERATURE CHECK
+        if (rule.sensor().equals("TEMPERATURE")) {
+            System.out.println("Checking TEMPERATURE → " + ctx.getTemperature() + " " + rule.operator() + " " + rule.value());
+
+            condition = switch (rule.operator()) {
+                case ">" -> ctx.getTemperature() > rule.value();
+                case "<" -> ctx.getTemperature() < rule.value();
+                case "=" -> ctx.getTemperature() == rule.value();
+                default -> false;
+            };
         }
 
-        if ("MOTION".equals(rule.sensor())) {
-            conditionMet = ctx.isMotionDetected();
+        // MOTION CHECK
+        if (rule.sensor().equals("MOTION")) {
+            System.out.println("Checking MOTION → motion=" + ctx.isMotionDetected());
+            condition = ctx.isMotionDetected();
         }
 
-        if (conditionMet) {
-            DeviceType type = DeviceType.valueOf(rule.deviceType());
-            boolean turnOn = "TURN_ON".equals(rule.action());
-            mediator.sendCommand(type, turnOn);
+        if (condition) {
+            System.out.println("Condition MET → executing action");
+            mediator.sendCommand(DeviceType.valueOf(rule.deviceType()), rule.action().equals("TURN_ON"));
+
+            return rule.deviceType() + " -> " + rule.action().replace("TURN_", "");
         }
+
+        System.out.println("Condition NOT MET → no action executed");
+        return "Condition not met – no action executed";
     }
 }

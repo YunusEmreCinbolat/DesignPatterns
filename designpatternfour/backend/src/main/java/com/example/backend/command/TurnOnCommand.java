@@ -11,5 +11,8 @@ public class TurnOnCommand implements Command {
     }
 
     @Override
-    public void execute() { device.turnOn(); }
+    public void execute() {
+        System.out.println("COMMAND → TURN ON " + device.getName());
+        device.turnOn();
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.backend.command;
 
-
 import com.example.backend.device.Device;
 
 public class TurnOffCommand implements Command {
@@ -12,5 +11,8 @@ public class TurnOffCommand implements Command {
     }
 
     @Override
-    public void execute() { device.turnOff(); }
+    public void execute() {
+        System.out.println("COMMAND → TURN OFF " + device.getName());
+        device.turnOff();
+    }
 }
