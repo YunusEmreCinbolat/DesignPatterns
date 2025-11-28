@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SmartHomeConfig {
 
+
+
     @Bean
     public SmartHomeMediator smartHomeMediator() {
         DefaultSmartHomeMediator mediator = new DefaultSmartHomeMediator();

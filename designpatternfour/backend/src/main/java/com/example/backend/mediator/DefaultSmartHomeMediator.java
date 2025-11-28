@@ -29,24 +29,30 @@ public class DefaultSmartHomeMediator implements SmartHomeMediator {
     @Override
     public String sendCommand(DeviceType type, boolean turnOn) {
 
+        System.out.println("[MEDIATOR] Command received → type=" + type +
+                ", action=" + (turnOn ? "TURN_ON" : "TURN_OFF"));
+
         StringBuilder result = new StringBuilder();
 
         devices.values().stream()
                 .filter(d -> d.getType() == type)
                 .forEach(device -> {
+
+                    System.out.println("[MEDIATOR] Sending command to → " + device.getName());
+
                     Command cmd = turnOn
                             ? new TurnOnCommand(device)
                             : new TurnOffCommand(device);
 
                     System.out.println("[MEDIATOR] Executing command → " + cmd.getClass().getSimpleName());
 
-                    cmd.execute();
+                    cmd.execute(); // 👉 Burada Command Pattern devrede
 
                     String line = device.getName()
                             + " -> "
                             + (turnOn ? "ON" : "OFF");
 
-                    System.out.println("[MEDIATOR] RESULT → " + line);  // 🔥 EKLENDİ
+                    System.out.println("[MEDIATOR] RESULT → " + line);
 
                     result.append(line).append("\n");
                 });
@@ -55,9 +61,10 @@ public class DefaultSmartHomeMediator implements SmartHomeMediator {
                 ? result.toString()
                 : "No device matched type: " + type;
 
-        System.out.println("[MEDIATOR] Final Output →\n" + finalText);  // 🔥 EKLENDİ
+        System.out.println("[MEDIATOR] Final Output →\n" + finalText);
 
         return finalText;
     }
+
 
 }
