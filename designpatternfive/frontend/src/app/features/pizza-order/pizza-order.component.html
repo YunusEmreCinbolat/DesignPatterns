@@ -1,0 +1,60 @@
+<div class="order-form">
+  <h2>🍕 Create Pizza Order</h2>
+
+  <form (ngSubmit)="submit()">
+    <label>
+      Customer Name
+      <input [(ngModel)]="customerName" name="customerName" required />
+    </label>
+
+    <label>
+      Size
+      <select [(ngModel)]="size" name="size">
+        <option value="SMALL">Small</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LARGE">Large</option>
+      </select>
+    </label>
+
+    <label>
+      Dough
+      <select [(ngModel)]="doughType" name="doughType">
+        <option value="THIN">Thin</option>
+        <option value="REGULAR">Regular</option>
+        <option value="THICK">Thick</option>
+      </select>
+    </label>
+
+    <label>
+      Sauce
+      <select [(ngModel)]="sauceType" name="sauceType">
+        <option value="TOMATO">Tomato</option>
+        <option value="BARBECUE">Barbecue</option>
+        <option value="WHITE">White</option>
+      </select>
+    </label>
+
+    <label>
+      Toppings (comma separated)
+      <input [(ngModel)]="toppingsText" name="toppingsText" placeholder="Mozzarella, Pepperoni" />
+    </label>
+
+    <label>
+      <input type="checkbox" [(ngModel)]="spicy" name="spicy" />
+      Spicy
+    </label>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Ordering...' : 'Place Order' }}
+    </button>
+  </form>
+
+  <div *ngIf="lastOrder" class="result">
+    <h3>Last Order</h3>
+    <pre>{{ lastOrder | json }}</pre>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+</div>

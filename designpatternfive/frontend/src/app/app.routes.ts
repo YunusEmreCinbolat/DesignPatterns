@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { PizzaOrderComponent } from './features/pizza-order/pizza-order.component';
+import { OrderListComponent } from './features/order-list/order-list.component';
+
 export const routes: Routes = [
-  {path: '', component: DashboardComponent}
+  { path: '', component: PizzaOrderComponent },
+  { path: 'orders', component: OrderListComponent },
 ];

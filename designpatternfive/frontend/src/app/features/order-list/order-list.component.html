@@ -1,0 +1,14 @@
+<div class="orders">
+  <h2>📜 All Orders</h2>
+
+  <button (click)="refresh()" [disabled]="loading">
+    {{ loading ? 'Loading...' : 'Refresh' }}
+  </button>
+
+  <ul>
+    <li *ngFor="let o of orders">
+      #{{ o.id }} - {{ o.customerName }} → {{ o.pizza.size }} {{ o.pizza.doughType }}
+      [{{ o.pizza.toppings.join(', ') }}]
+    </li>
+  </ul>
+</div>
