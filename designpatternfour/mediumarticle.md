@@ -1,5 +1,5 @@
-# Akıllı Ev Yönetimi Üzerinden Visitor, Mediator, Memento ve Interpreter Tasarım Desenlerini Derinlemesine Öğrenin
-Modern IoT sistemleri, her biri farklı davranışlara sahip akıllı cihazların birlikte çalıştığı yapılardır.
+# Akıllı Ev Yönetimi Üzerinden Visitoır, Mediator, Memento ve Interpreter Tasarım Desenleriniz Derinlemesine Öğrenin
+Modern IoT sistemleri, her biri farklı davranışlara sahip akıllı cihazların birlikte çalıştığı yaplardır.
 Akıllı ev sistemleri de bu mimarinin doğrudan uygulama alanlarından biridir.
 Bu sistemlerde cihazların:
 - Birbirleriyle koordineli şekilde çalışması,
@@ -658,11 +658,6 @@ Yani Controller:
 Bu desenlerin birbirini desteklemesi mimariyi çok güçlü kılar.
 
 ## 8. Kapanış — Modern IoT Sistemleri İçin Profesyonel Bir Tasarım Yaklaşımı
-e, yazılım tasarım desenlerinin bir arada nasıl güçlü bir mimari oluşturduğunu kanıtlar niteliktedir.
-Visitor, Mediator, Memento ve Interpreter desenleri:
-- Birbirlerini tamamlayan,
-- Sorumlulukları net şekilde bölüştüren,
-- IoT dünyasının gerçek problemlerine çözüm üreten
-yapılardır.
-Bu yapı yalnızca işlevsel değil, mimari açıdan da son derece sağlıklıdır.
-Bu tür bir yaklaşım küçük bir akıllı evden milyonlarca cihazın yönetildiği dev IoT sistemlerine kadar kolaylıkla ölçeklenebilir.
+Bu proje, yazılım tasarım desenlerinin bir arada kullanıldığında nasıl güçlü ve sürdürülebilir bir mimari oluşturduğunu açıkça ortaya koymaktadır. Visitor, Mediator, Memento ve Interpreter desenleri; karmaşık iş akışlarını sadeleştiren, davranışları modülerleştiren ve sistemdeki sorumlulukları net şekilde ayrıştıran yapılardır. Her bir desen kendi rolünü üstlenerek IoT ekosistemindeki gerçek problemleri çözebilir hale gelir: Visitor cihazlardan ek operasyonlar toplamayı sağlar, Mediator cihazlar arası iletişimi merkezileştirir, Memento cihaz durumlarının geçmişe dönük olarak saklanmasına imkân tanır ve Interpreter kuralları metinsel ifadelerden çalışabilir iş mantığına dönüştürür.
+
+Bu yaklaşım yalnızca işlevsel değil, aynı zamanda mimari olarak da son derece sağlıklıdır. Bu desenlerin birlikte kullanılması, sistemin hem genişletilebilir olmasını sağlar hem de kodun bakımını kolaylaştırır. Böyle bir mimari; küçük bir akıllı ev uygulamasından, milyonlarca cihazın yönetildiği devasa IoT altyapılarına kadar güvenle ölçeklenebilir. Tasarım desenlerinin bu uyumlu yapısı, projeyi hem bugünün ihtiyaçlarına cevap veren hem de geleceğe hazır bir çözüm haline getirir.
