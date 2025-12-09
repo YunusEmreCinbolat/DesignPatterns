@@ -1,60 +1,62 @@
-<div class="order-form">
-  <h2>🍕 Create Pizza Order</h2>
+<div class="form-card">
+  <h2>Create Pizza Order</h2>
 
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" class="pizza-form">
     <label>
       Customer Name
-      <input [(ngModel)]="customerName" name="customerName" required />
+      <input type="text" [(ngModel)]="customerName" name="customerName" />
     </label>
 
-    <label>
-      Size
-      <select [(ngModel)]="size" name="size">
-        <option value="SMALL">Small</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="LARGE">Large</option>
-      </select>
-    </label>
+    <div class="form-row">
+      <label>
+        Size
+        <select [(ngModel)]="size" name="size">
+          <option>SMALL</option>
+          <option>MEDIUM</option>
+          <option>LARGE</option>
+        </select>
+      </label>
 
-    <label>
-      Dough
-      <select [(ngModel)]="doughType" name="doughType">
-        <option value="THIN">Thin</option>
-        <option value="REGULAR">Regular</option>
-        <option value="THICK">Thick</option>
-      </select>
-    </label>
+      <label>
+        Dough
+        <select [(ngModel)]="doughType" name="doughType">
+          <option>THIN</option>
+          <option>REGULAR</option>
+          <option>THICK</option>
+        </select>
+      </label>
 
-    <label>
-      Sauce
-      <select [(ngModel)]="sauceType" name="sauceType">
-        <option value="TOMATO">Tomato</option>
-        <option value="BARBECUE">Barbecue</option>
-        <option value="WHITE">White</option>
-      </select>
-    </label>
+      <label>
+        Sauce
+        <select [(ngModel)]="sauceType" name="sauceType">
+          <option>TOMATO</option>
+          <option>BARBECUE</option>
+        </select>
+      </label>
+    </div>
 
     <label>
       Toppings (comma separated)
-      <input [(ngModel)]="toppingsText" name="toppingsText" placeholder="Mozzarella, Pepperoni" />
+      <input
+        type="text"
+        [(ngModel)]="toppings"
+        name="toppings"
+        placeholder="Mozzarella, Pepperoni"
+      />
     </label>
 
-    <label>
+    <label class="checkbox">
       <input type="checkbox" [(ngModel)]="spicy" name="spicy" />
       Spicy
     </label>
 
-    <button type="submit" [disabled]="loading">
-      {{ loading ? 'Ordering...' : 'Place Order' }}
-    </button>
+    <button type="submit" class="btn-primary">Place Order</button>
   </form>
 
   <div *ngIf="lastOrder" class="result">
-    <h3>Last Order</h3>
-    <pre>{{ lastOrder | json }}</pre>
-  </div>
+    <h3>Order Result</h3>
+    <div class="order-result" *ngIf="orderResult">
+  {{ orderResult }}</div>
 
-  <div *ngIf="errorMessage" class="error">
-    {{ errorMessage }}
   </div>
 </div>

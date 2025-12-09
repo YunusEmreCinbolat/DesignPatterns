@@ -1,14 +1,21 @@
-<div class="orders">
-  <h2>📜 All Orders</h2>
+<div class="orders-container">
+  <h2>All Orders</h2>
 
-  <button (click)="refresh()" [disabled]="loading">
-    {{ loading ? 'Loading...' : 'Refresh' }}
-  </button>
+  <div *ngIf="orders.length === 0" class="empty">No orders yet.</div>
 
-  <ul>
-    <li *ngFor="let o of orders">
-      #{{ o.id }} - {{ o.customerName }} → {{ o.pizza.size }} {{ o.pizza.doughType }}
-      [{{ o.pizza.toppings.join(', ') }}]
-    </li>
-  </ul>
+  <div class="orders-grid">
+    <div *ngFor="let order of orders" class="order-card">
+      <h3>#{{ order.id }} — {{ order.customerName }}</h3>
+
+      <p><b>Size:</b> {{ order.pizza.size }}</p>
+      <p><b>Dough:</b> {{ order.pizza.doughType }}</p>
+      <p><b>Sauce:</b> {{ order.pizza.sauceType }}</p>
+      <p><b>Spicy:</b> {{ order.pizza.spicy ? 'Yes' : 'No' }}</p>
+
+      <p><b>Toppings:</b></p>
+      <ul>
+        <li *ngFor="let t of order.pizza.toppings">{{ t }}</li>
+      </ul>
+    </div>
+  </div>
 </div>

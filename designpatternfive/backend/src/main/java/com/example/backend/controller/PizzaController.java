@@ -24,29 +24,26 @@ public class PizzaController {
 
         System.out.println("[API] Incoming order request → " + request.getCustomerName());
 
-        Pizza pizza = new Pizza.Builder()
+        Pizza.Builder builder = new Pizza.Builder()
                 .size(Size.valueOf(request.getSize()))
                 .doughType(DoughType.valueOf(request.getDoughType()))
                 .sauceType(SauceType.valueOf(request.getSauceType()))
-                .spicy(request.isSpicy())
-                .build();
+                .spicy(request.isSpicy());
 
         if (request.getToppings() != null) {
             for (String topping : request.getToppings()) {
-                pizza = new Pizza.Builder()
-                        .size(pizza.getSize())
-                        .doughType(pizza.getDoughType())
-                        .sauceType(pizza.getSauceType())
-                        .spicy(pizza.isSpicy())
-                        .addTopping(topping)
-                        .build();
+                System.out.println("[API] Adding topping → " + topping);
+                builder.addTopping(topping);
             }
         }
+
+        Pizza pizza = builder.build();
 
         Order order = orderManager.placeOrder(request.getCustomerName(), pizza);
 
         return ResponseEntity.ok(order);
     }
+
 
     @GetMapping("/orders")
     public ResponseEntity<List<Order>> getAllOrders() {

@@ -4,32 +4,39 @@ import { CommonModule } from '@angular/common';
 import { Order } from '../../model/Order';
 import { PizzaOrderRequest } from '../../model/PizzaOrderRequest';
 import { PizzaApiService } from '../../services/pizza-api.service';
+
 @Component({
   selector: 'app-pizza-order',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './pizza-order.component.html',
   styleUrls: ['./pizza-order.component.css'],
-}) 
+})
 export class PizzaOrderComponent {
   customerName = '';
   size = 'MEDIUM';
   doughType = 'REGULAR';
   sauceType = 'TOMATO';
-  toppingsText = '';
+  toppings = '';
   spicy = false;
 
-  lastOrder?: Order;
   loading = false;
   errorMessage = '';
+  orderResult = '';
+  lastOrder: Order | null = null;
 
   constructor(private api: PizzaApiService) {}
 
   submit() {
+    if (!this.customerName) {
+      this.orderResult = 'Lütfen müşteri adını girin.';
+      return;
+    }
+
     this.loading = true;
     this.errorMessage = '';
 
-    const toppings = this.toppingsText
+    const toppings = this.toppings
       .split(',')
       .map((t) => t.trim())
       .filter((t) => t.length > 0);
@@ -45,12 +52,14 @@ export class PizzaOrderComponent {
 
     this.api.createOrder(payload).subscribe({
       next: (order) => {
-        this.lastOrder = order;
+        this.lastOrder = order;   // 🔥 ARTIK HTML *ngIf çalışıyor
+        this.orderResult =
+          '🍕 Siparişiniz başarıyla oluşturuldu, teslimat için bilgilendirileceksiniz!';
         this.loading = false;
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         this.errorMessage = 'Order failed';
+        this.orderResult = '❌ Sipariş oluşturulurken bir hata oluştu.';
         this.loading = false;
       },
     });

@@ -46,7 +46,7 @@ public class DefaultSmartHomeMediator implements SmartHomeMediator {
 
                     System.out.println("[MEDIATOR] Executing command → " + cmd.getClass().getSimpleName());
 
-                    cmd.execute(); // 👉 Burada Command Pattern devrede
+                    cmd.execute();
 
                     String line = device.getName()
                             + " -> "
