@@ -29,16 +29,17 @@ public class OrderManager {
     }
 
     public synchronized Order placeOrder(String customerName, Pizza pizza) {
-        System.out.println("[SINGLETON] Saving new order...");
-        System.out.println(" → Customer: " + customerName);
-        System.out.println(" → Pizza: " + pizza);
 
-        Order order = new Order((int) orderSequence++, customerName, pizza);
+        Order order = Order.builder()
+                .id(orderSequence++)
+                .customerName(customerName)
+                .pizza(pizza)
+                .build();
+
         orders.add(order);
-
-        System.out.println("[SINGLETON] Order stored: " + order);
         return order;
     }
+
 
     public List<Order> getAllOrders() {
         System.out.println("[SINGLETON] Returning all orders (count = " + orders.size() + ")");
