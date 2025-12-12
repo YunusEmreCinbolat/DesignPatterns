@@ -1,0 +1,61 @@
+<div class="cart-container">
+  <h1>E-Commerce Discount Engine</h1>
+
+  <section class="cart-section">
+    <h2>Cart Items</h2>
+
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items; let i = index">
+          <td>{{ item.productId }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.price | currency:'TRY':'symbol' }}</td>
+          <td>{{ item.quantity }}</td>
+          <td><button (click)="removeItem(i)">Remove</button></td>
+        </tr>
+
+        <tr class="new-row">
+          <td><input [(ngModel)]="newItem.productId" placeholder="P3" /></td>
+          <td><input [(ngModel)]="newItem.name" placeholder="Product name" /></td>
+          <td><input type="number" [(ngModel)]="newItem.price" /></td>
+          <td><input type="number" [(ngModel)]="newItem.quantity" /></td>
+          <td><button (click)="addItem()">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="discount-section">
+    <h2>Discount Type</h2>
+
+    <select [(ngModel)]="discountType">
+      <option value="NONE">No Discount</option>
+      <option value="PERCENTAGE">Percentage (%20)</option>
+      <option value="BUY_X_GET_Y">Buy 3 Get 1 Free (P1)</option>
+      <option value="FREE_SHIPPING">Free Shipping (30₺, subtotal ≥ 200₺)</option>
+    </select>
+
+    <button (click)="calculate()" [disabled]="loading">
+      {{ loading ? 'Calculating...' : 'Calculate Total' }}
+    </button>
+  </section>
+
+  <section class="result-section" *ngIf="result">
+    <h2>Result</h2>
+    <p><strong>Subtotal:</strong> {{ result.subtotal | currency:'TRY':'symbol' }}</p>
+    <p><strong>Discount:</strong> -{{ result.discount | currency:'TRY':'symbol' }}</p>
+    <p><strong>Final Total:</strong> {{ result.finalTotal | currency:'TRY':'symbol' }}</p>
+    <p><strong>Description:</strong> {{ result.description }}</p>
+  </section>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>

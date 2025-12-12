@@ -1,34 +1,45 @@
-.app-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  color: #fff;
-  font-family: Arial, sans-serif;
+/* ==== GLOBAL APP LAYOUT ==== */
+
+.app-shell {
+    min-height: 100vh;
+    background: #f1f5f9;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background: #111;
+.header {
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .title {
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #475569;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
 }
 
 .nav {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 25px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
 }
 
 .nav a {
-  color: #ffa73c;
-  text-decoration: none;
-  font-weight: bold;
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
 }
 
-.nav a.active {
-  text-decoration: underline;
+.nav a:hover {
+    text-decoration: underline;
+    color: #0f172a;
 }

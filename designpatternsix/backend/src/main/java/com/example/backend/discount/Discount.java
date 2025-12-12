@@ -1,4 +1,8 @@
 package com.example.backend.discount;
 
-public class Discount {
+import com.example.backend.model.Cart;
+
+public interface Discount {
+    double calculate(Cart cart);
+    String getDescription();
 }
