@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pizzas")
 @CrossOrigin(origins = "http://localhost:4200")
-public class OrderController {
+public class  OrderController {
 
     private final OrderManager orderManager = OrderManager.getInstance();
     private final PizzaBuilder pizzaBuilder;
