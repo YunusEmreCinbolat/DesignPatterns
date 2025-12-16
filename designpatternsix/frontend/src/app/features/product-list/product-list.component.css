@@ -1,0 +1,30 @@
+.product-card {
+  background: #020617;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+
+.product-card h3 {
+  margin: 0 0 6px;
+}
+
+.product-card p {
+  margin: 0 0 10px;
+  color: #9ca3af;
+}
+
+.product-card button {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  opacity: 0.9;
+}

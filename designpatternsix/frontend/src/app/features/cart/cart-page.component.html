@@ -1,61 +1,64 @@
-<div class="cart-container">
-  <h1>E-Commerce Discount Engine</h1>
+<div class="page">
+  <section class="card">
 
-  <section class="cart-section">
+    <h2>Add Product</h2>
+
+    <div class="form-row">
+      <select [(ngModel)]="selectedProductId" (change)="onProductChange()">
+        <option value="">Select product</option>
+        <option *ngFor="let p of products" [value]="p.id">
+          {{ p.name }} — {{ p.price | currency }}
+        </option>
+      </select>
+
+      <input
+        type="number"
+        min="1"
+        [(ngModel)]="selectedQty"
+        placeholder="Qty"
+      />
+
+      <button (click)="addToCart()">Add</button>
+    </div>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  </section>
+
+  <section class="card">
+
     <h2>Cart Items</h2>
 
-    <table class="cart-table">
-      <thead>
-        <tr>
-          <th>Product ID</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Qty</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of items; let i = index">
-          <td>{{ item.productId }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.price | currency:'TRY':'symbol' }}</td>
-          <td>{{ item.quantity }}</td>
-          <td><button (click)="removeItem(i)">Remove</button></td>
-        </tr>
+    <div *ngIf="cartItems.length === 0" class="empty">
+      Cart is empty.
+    </div>
 
-        <tr class="new-row">
-          <td><input [(ngModel)]="newItem.productId" placeholder="P3" /></td>
-          <td><input [(ngModel)]="newItem.name" placeholder="Product name" /></td>
-          <td><input type="number" [(ngModel)]="newItem.price" /></td>
-          <td><input type="number" [(ngModel)]="newItem.quantity" /></td>
-          <td><button (click)="addItem()">Add</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+    <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+      <span>{{ item.name }}</span>
+      <span>x{{ item.quantity }}</span>
+      <span>{{ item.price * item.quantity | currency }}</span>
+      <button class="remove" (click)="removeItem(i)">✕</button>
+    </div>
 
-  <section class="discount-section">
-    <h2>Discount Type</h2>
+    <div class="divider"></div>
 
+    <div class="subtotal">
+      Subtotal: {{ cartSubtotal | currency }}
+    </div>
+
+    <label>Discount Type</label>
     <select [(ngModel)]="discountType">
-      <option value="NONE">No Discount</option>
-      <option value="PERCENTAGE">Percentage (%20)</option>
-      <option value="BUY_X_GET_Y">Buy 3 Get 1 Free (P1)</option>
-      <option value="FREE_SHIPPING">Free Shipping (30₺, subtotal ≥ 200₺)</option>
+      <option *ngFor="let t of discountTypes" [ngValue]="t">{{ getDiscountLabel(t) }}</option>
     </select>
 
-    <button (click)="calculate()" [disabled]="loading">
-      {{ loading ? 'Calculating...' : 'Calculate Total' }}
+    <button class="primary" (click)="calculate()" [disabled]="loading">
+      {{ loading ? 'Calculating…' : 'Calculate Total' }}
     </button>
+
+    <div *ngIf="result" class="result">
+      <strong>Total:</strong> {{ result.finalTotal | currency }}
+    </div>
+
   </section>
 
-  <section class="result-section" *ngIf="result">
-    <h2>Result</h2>
-    <p><strong>Subtotal:</strong> {{ result.subtotal | currency:'TRY':'symbol' }}</p>
-    <p><strong>Discount:</strong> -{{ result.discount | currency:'TRY':'symbol' }}</p>
-    <p><strong>Final Total:</strong> {{ result.finalTotal | currency:'TRY':'symbol' }}</p>
-    <p><strong>Description:</strong> {{ result.description }}</p>
-  </section>
-
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 </div>

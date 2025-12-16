@@ -1,45 +1,41 @@
-/* ==== GLOBAL APP LAYOUT ==== */
-
 .app-shell {
-    min-height: 100vh;
-    background: #f1f5f9;
-    padding: 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.25rem 1rem 3rem;
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
 }
 
 .title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
 }
 
 .subtitle {
-    font-size: 1rem;
-    color: #475569;
-    margin-top: 0.25rem;
-    margin-bottom: 1rem;
+  margin-top: 0.25rem;
+  color: #9ca3af;
 }
 
 .nav {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1.75rem;
 }
 
 .nav a {
-    margin: 0 1rem;
-    text-decoration: none;
-    color: #334155;
-    font-weight: 500;
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  margin: 0 0.25rem;
+  text-decoration: none;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+  border-radius: 999px;
+  background: rgba(2, 6, 23, 0.25);
 }
 
 .nav a:hover {
-    text-decoration: underline;
-    color: #0f172a;
+  background: rgba(2, 6, 23, 0.45);
 }

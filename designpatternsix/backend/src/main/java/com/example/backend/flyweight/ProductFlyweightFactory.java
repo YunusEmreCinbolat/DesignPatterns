@@ -19,6 +19,10 @@ public class ProductFlyweightFactory {
         return CACHE.get(id);
     }
 
+    public static Map<String, Product> getAll() {
+        return CACHE;
+    }
+
     public static int cacheSize() {
         return CACHE.size();
     }
