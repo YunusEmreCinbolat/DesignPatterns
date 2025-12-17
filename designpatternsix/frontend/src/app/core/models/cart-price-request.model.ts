@@ -4,8 +4,8 @@ export type DiscountType = 'NONE' | 'PERCENTAGE' | 'BUY_X_GET_Y' | 'FREE_SHIPPIN
 
 export const DISCOUNT_TYPE_LABELS: Partial<Record<DiscountType, string>> = {
   NONE: 'No Discount',
-  PERCENTAGE: '20% Discount',
-  BUY_X_GET_Y: 'Buy 3 Get 1 (P1)',
+  PERCENTAGE: '10% Discount',
+  BUY_X_GET_Y: 'Buy 2 Get 1',
   FREE_SHIPPING: 'Free Shipping',
 };
 
