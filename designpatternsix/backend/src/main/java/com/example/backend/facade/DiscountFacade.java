@@ -5,19 +5,23 @@ import com.example.backend.discount.*;
 import com.example.backend.enums.DiscountType;
 import com.example.backend.model.Cart;
 import com.example.backend.model.DiscountResult;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class DiscountFacade {
 
     private static final double SHIPPING_FEE = 50.0;
 
     public DiscountResult applyDiscount(Cart cart, DiscountType type) {
 
-    System.out.println("[FACADE] DiscountFacade orchestrating pricing (Strategy + Bridge)");
-    System.out.println("[FACADE] Input → items=" + cart.getItems().size() + ", subtotal=" + cart.getSubtotal() + ", discountType=" + type);
+        log.info("[FACADE] DiscountFacade orchestrating pricing (Strategy + Bridge)");
+        log.debug("[FACADE] Input → items={}, subtotal={}, discountType={}", cart.getItems().size(), cart.getSubtotal(), type);
 
-    Discount discountStrategy = resolveStrategy(type);
+        Discount discountStrategy = resolveStrategy(type);
 
-    System.out.println("[STRATEGY] Selected discount strategy → " + discountStrategy.getClass().getSimpleName());
+        log.debug("[STRATEGY] Selected discount strategy → {}", discountStrategy.getClass().getSimpleName());
 
         double discountAmount = discountStrategy.calculate(cart);
         cart.applyDiscount(discountAmount);
@@ -29,18 +33,19 @@ public class DiscountFacade {
             : new FlatRateShipping(SHIPPING_FEE);
         Checkout checkout = new StandardCheckout(shipping);
 
-    System.out.println("[BRIDGE] Checkout abstraction → " + checkout.getClass().getSimpleName() + " | Shipping implementor → " + shipping.getClass().getSimpleName());
+        log.debug("[BRIDGE] Checkout abstraction → {} | Shipping implementor → {}",
+            checkout.getClass().getSimpleName(),
+            shipping.getClass().getSimpleName());
 
         double shippingFee = checkout.calculateShippingFee(cart);
         double finalTotalWithShipping = checkout.calculateFinalTotal(totalAfterDiscount, cart);
 
-    System.out.println(
-        "[FACADE] Breakdown → subtotal=" + cart.getSubtotal()
-            + ", discount=" + discountAmount
-            + ", afterDiscount=" + totalAfterDiscount
-            + ", shipping=" + shippingFee
-            + ", finalTotal=" + finalTotalWithShipping
-    );
+        log.info("[FACADE] Breakdown → subtotal={}, discount={}, afterDiscount={}, shipping={}, finalTotal={}",
+            cart.getSubtotal(),
+            discountAmount,
+            totalAfterDiscount,
+            shippingFee,
+            finalTotalWithShipping);
 
         return new DiscountResult(
                 cart.getSubtotal(),
@@ -54,7 +59,7 @@ public class DiscountFacade {
 
     private Discount resolveStrategy(DiscountType type) {
 
-        System.out.println("[STRATEGY] Resolving discount strategy for type=" + type);
+        log.debug("[STRATEGY] Resolving discount strategy for type={}", type);
         return switch (type) {
             case NONE -> new Discount() {
                 @Override
