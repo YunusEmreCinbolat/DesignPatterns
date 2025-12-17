@@ -1,56 +1,106 @@
-# 🎯 Design Patterns Application — Spring Boot & Angular
+# DesignPatterns — 6 Mini Projects with Spring Boot + Angular
 
-A full-stack application built with **Spring Boot (Backend)** and **Angular (Frontend)** demonstrating real-world implementations of multiple **Design Patterns** such as **Factory**, **Strategy**, **Observer**, **Command**, **State**, and **Decorator**.
+This repository contains 6 independent mini projects built to learn Design Patterns through **working, end-to-end examples**. Each project follows the same idea with a **backend (Spring Boot)** and a **frontend (Angular)**, and includes an accompanying article that explains the patterns used.
 
-This project merges architectural principles with practical software engineering to show how design patterns can create flexible, maintainable, and scalable applications.
-
----
-
-## 🧩 Implemented Design Patterns
-
-| Category | Pattern | Description |
-|-----------|----------|--------------|
-| **Creational** | 🏭 Factory | Creates product or device objects dynamically without exposing the instantiation logic. |
-| **Behavioral** | 💡 Strategy | Defines interchangeable algorithms for applying different discount logics. |
-| **Behavioral** | 🔔 Observer | Automatically updates dependent components (e.g., cart totals, UI states). |
-| **Behavioral** | ⚙️ Command | Encapsulates user actions (turn on/off devices) as command objects. |
-| **Behavioral** | 🔁 State | Changes the behavior of devices based on their internal ON/OFF state. |
-| **Structural** | ⚡ Decorator | Dynamically adds extra features (Timer, Energy Saver) to devices. |
+> Each project is standalone: pick one folder and run only that one.
 
 ---
 
-## ⚙️ Technologies Used
+## Projects (6/6)
 
-| Layer | Technology |
-|--------|-------------|
-| **Frontend** | Angular 17, TypeScript, RxJS |
-| **Backend** | Spring Boot 3, Java 17, Maven |
-| **Tools** | Node.js, npm, REST APIs |
-| **Architecture** | Layered + Pattern-Oriented Design |
+| Folder | Scenario | Design Patterns | Article |
+|---|---|---|---|
+| `designpatternone` | Mini e-commerce: product creation, discounts, cart updates | Factory, Strategy, Observer, Null Object | `designpatternone/mediumarticle.md` |
+| `designpatterntwo` | Smart device management (IoT): states, actions, dynamic add-ons | State, Command, Decorator | `designpatterntwo/mediumarticle.md` |
+| `designpatternthree` | Order management: product trees, price caching, rule pipeline | Composite, Proxy, Chain of Responsibility | `designpatternthree/mediumarticle.md` |
+| `designpatternfour` | Smart home orchestration: coordination and automation | Mediator, Visitor, Memento, Interpreter (+ Command integration) | `designpatternfour/mediumarticle.md` |
+| `designpatternfive` | Pizza ordering system: object construction and centralized management | Builder, Singleton | `designpatternfive/mediumarticle.md` |
+| `designpatternsix` | Cart pricing: efficiency, shipping/checkout decoupling, orchestration | Flyweight, Strategy, Bridge, Facade | `designpatternsix/mediumarticle.md` |
 
 ---
 
-## 🚀 Installation & Run (Combined Setup)
+## Design Patterns Used (All)
 
-Follow these steps to **install and run the entire application** (backend + frontend) in one flow:
+### Creational
 
-```bash
-# 1️⃣ Clone the repository
-git clone https://github.com/YunusEmreCinbolat/DesignPatterns.git
-cd DesignPatterns
+- Factory
+- Builder
+- Singleton
 
-# 2️⃣ Build backend (Spring Boot)
-cd designpatterntwo/backend
-mvn clean install
+### Structural
 
-# 3️⃣ Install frontend dependencies (Angular)
-cd ../frontend
-npm instalm
+- Decorator
+- Composite
+- Proxy
+- Flyweight
+- Bridge
+- Facade
 
-# 4️⃣ Start backend in background
-cd ../backend
-mvn spring-boot:run &
+### Behavioral
 
-# 5️⃣ Start frontend application
-cd ../frontend
-ng serve
+- Strategy
+- Observer
+- Command
+- State
+- Chain of Responsibility
+- Mediator
+- Visitor
+- Memento
+- Interpreter
+- Null Object
+
+## Tech Stack
+
+- **Backend:** Spring Boot 3.x, Java 21, Gradle (wrapper: `gradlew`/`gradlew.bat`)
+- **Frontend:** Angular 19, TypeScript, RxJS (via npm scripts)
+- **Communication:** REST APIs (some frontends use `proxy.conf.json` to forward `/api` calls to the backend)
+
+---
+
+## Running (Windows)
+
+Each project follows the same directory structure:
+
+```
+<project-folder>/
+	backend/
+	frontend/
+	mediumarticle.md
+```
+
+Example: run the `designpatternfour` project.
+
+### 1) Backend (Spring Boot)
+
+```powershell
+cd .\designpatternfour\backend
+.\gradlew.bat bootRun
+```
+
+To run tests:
+
+```powershell
+.\gradlew.bat test
+```
+
+> By default, the backend usually runs on `http://localhost:8080`.
+
+### 2) Frontend (Angular)
+
+```powershell
+cd ..\frontend
+npm install
+npm start
+```
+
+> By default, the frontend runs on `http://localhost:4200`.
+
+Note: If Angular CLI is not installed globally, prefer `npm start` (project script). If needed, `npx ng serve` also works.
+
+---
+
+## Notes
+
+- If you run multiple projects at the same time, backend ports may conflict (most projects use 8080). The simplest approach is to run one project at a time, or change the port in `application.properties`/`application.yml`.
+- Some frontends include `proxy.conf.json`, and `npm start` already runs with `--proxy-config proxy.conf.json` (e.g. `/api` → `http://localhost:8080`).
+
