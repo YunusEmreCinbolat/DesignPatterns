@@ -1,8 +1,11 @@
 package com.example.backend.model;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Cart {
 
     private final List<CartItem> items = new ArrayList<>();
@@ -20,22 +23,6 @@ public class Cart {
                 .mapToDouble(CartItem::getLineTotal)
                 .sum();
         this.finalTotal = subtotal - discountAmount;
-    }
-
-    public List<CartItem> getItems() {
-        return items;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public double getDiscountAmount() {
-        return discountAmount;
-    }
-
-    public double getFinalTotal() {
-        return finalTotal;
     }
 
     public void applyDiscount(double discountAmount) {

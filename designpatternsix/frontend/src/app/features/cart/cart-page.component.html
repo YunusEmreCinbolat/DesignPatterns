@@ -48,7 +48,7 @@
 
     <label>Discount Type</label>
     <select [(ngModel)]="discountType">
-      <option *ngFor="let t of discountTypes" [ngValue]="t">{{ getDiscountLabel(t) }}</option>
+      <option *ngFor="let t of discountTypes" [ngValue]="t">{{ discountTypeLabels[t] ?? t }}</option>
     </select>
 
     <button class="primary" (click)="calculate()" [disabled]="loading">
@@ -56,7 +56,13 @@
     </button>
 
     <div *ngIf="result" class="result">
-      <strong>Total:</strong> {{ result.finalTotal | currency }}
+      <div><strong>Subtotal:</strong> {{ result.subtotal | currency }}</div>
+      <div><strong>Discount:</strong> -{{ result.discount | currency }}</div>
+      <div><strong>After Discount:</strong> {{ resultTotalAfterDiscount | currency }}</div>
+      <div><strong>Shipping:</strong> {{ resultShippingFee | currency }}</div>
+      <div class="divider"></div>
+      <div><strong>Total:</strong> {{ result.finalTotal | currency }}</div>
+      <div *ngIf="result.description" class="muted">{{ result.description }}</div>
     </div>
 
   </section>

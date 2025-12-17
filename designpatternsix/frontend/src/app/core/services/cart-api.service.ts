@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environment/environment';
 
 @Injectable({ providedIn: 'root' })
-export class DiscountApiService {
-  private baseUrl = `${environment.apiUrl}/api/discount`;
+export class CartApiService {
+  private baseUrl = `${environment.apiUrl}/api/cart`;
 
   constructor(private http: HttpClient) {}
 
-
-  getDiscountTypes(): Observable<DiscountType[]> {
-    return this.http.get<DiscountType[]>(`${this.baseUrl}/types`);
+  calculatePrice(payload: CartPriceRequest): Observable<CartPriceResponse> {
+    return this.http.post<CartPriceResponse>(`${this.baseUrl}/price`, payload);
   }
+
 }

@@ -21,6 +21,9 @@ public class CartController {
     @PostMapping("/price")
     public ResponseEntity<CartPriceResponse> calculatePrice(@RequestBody CartPriceRequest request) {
 
+        System.out.println("[API] POST /api/cart/price → calculating cart price");
+        System.out.println("[API] Request → items=" + (request.getItems() == null ? 0 : request.getItems().size()) + ", discountType=" + request.getDiscountType());
+
         Cart cart = new Cart();
 
         for (CartItemRequest itemReq : request.getItems()) {
@@ -32,11 +35,15 @@ public class CartController {
             cart.addItem(new CartItem(product, itemReq.getQuantity()));
         }
 
+        System.out.println("[API] Built Cart → items=" + cart.getItems().size() + ", subtotal=" + cart.getSubtotal());
+
         DiscountResult result = discountFacade.applyDiscount(cart, request.getDiscountType());
 
         CartPriceResponse response = new CartPriceResponse(
                 result.getSubtotal(),
                 result.getDiscountAmount(),
+            result.getTotalAfterDiscount(),
+            result.getShippingFee(),
                 result.getFinalTotal(),
                 result.getDescription()
         );

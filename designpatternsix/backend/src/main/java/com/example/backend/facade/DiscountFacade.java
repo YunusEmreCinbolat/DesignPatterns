@@ -1,5 +1,6 @@
 package com.example.backend.facade;
 
+import com.example.backend.bridge.*;
 import com.example.backend.discount.*;
 import com.example.backend.enums.DiscountType;
 import com.example.backend.model.Cart;
@@ -11,24 +12,49 @@ public class DiscountFacade {
 
     public DiscountResult applyDiscount(Cart cart, DiscountType type) {
 
-        Discount discountStrategy = resolveStrategy(type);
+    System.out.println("[FACADE] DiscountFacade orchestrating pricing (Strategy + Bridge)");
+    System.out.println("[FACADE] Input → items=" + cart.getItems().size() + ", subtotal=" + cart.getSubtotal() + ", discountType=" + type);
+
+    Discount discountStrategy = resolveStrategy(type);
+
+    System.out.println("[STRATEGY] Selected discount strategy → " + discountStrategy.getClass().getSimpleName());
 
         double discountAmount = discountStrategy.calculate(cart);
         cart.applyDiscount(discountAmount);
 
-        double shippingFee = (type == DiscountType.FREE_SHIPPING) ? 0.0 : SHIPPING_FEE;
-        double finalTotalWithShipping = cart.getFinalTotal() + shippingFee;
+        double totalAfterDiscount = cart.getFinalTotal();
+
+        ShippingImplementor shipping = (type == DiscountType.FREE_SHIPPING)
+            ? new FreeShipping()
+            : new FlatRateShipping(SHIPPING_FEE);
+        Checkout checkout = new StandardCheckout(shipping);
+
+    System.out.println("[BRIDGE] Checkout abstraction → " + checkout.getClass().getSimpleName() + " | Shipping implementor → " + shipping.getClass().getSimpleName());
+
+        double shippingFee = checkout.calculateShippingFee(cart);
+        double finalTotalWithShipping = checkout.calculateFinalTotal(totalAfterDiscount, cart);
+
+    System.out.println(
+        "[FACADE] Breakdown → subtotal=" + cart.getSubtotal()
+            + ", discount=" + discountAmount
+            + ", afterDiscount=" + totalAfterDiscount
+            + ", shipping=" + shippingFee
+            + ", finalTotal=" + finalTotalWithShipping
+    );
 
         return new DiscountResult(
                 cart.getSubtotal(),
                 discountAmount,
-            finalTotalWithShipping,
+                totalAfterDiscount,
+                shippingFee,
+                finalTotalWithShipping,
                 discountStrategy.getDescription()
         );
     }
 
     private Discount resolveStrategy(DiscountType type) {
 
+        System.out.println("[STRATEGY] Resolving discount strategy for type=" + type);
         return switch (type) {
             case NONE -> new Discount() {
                 @Override

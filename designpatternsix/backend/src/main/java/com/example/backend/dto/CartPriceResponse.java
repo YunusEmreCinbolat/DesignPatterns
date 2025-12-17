@@ -1,21 +1,16 @@
 package com.example.backend.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public class CartPriceResponse {
 
     private double subtotal;
     private double discount;
+    private double totalAfterDiscount;
+    private double shippingFee;
     private double finalTotal;
     private String description;
-
-    public CartPriceResponse(double subtotal, double discount, double finalTotal, String description) {
-        this.subtotal = subtotal;
-        this.discount = discount;
-        this.finalTotal = finalTotal;
-        this.description = description;
-    }
-
-    public double getSubtotal() { return subtotal; }
-    public double getDiscount() { return discount; }
-    public double getFinalTotal() { return finalTotal; }
-    public String getDescription() { return description; }
 }

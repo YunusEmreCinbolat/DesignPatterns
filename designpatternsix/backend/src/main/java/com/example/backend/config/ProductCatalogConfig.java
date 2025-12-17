@@ -10,7 +10,7 @@ public class ProductCatalogConfig {
     @PostConstruct
     public void preloadProducts() {
 
-        System.out.println("[INIT] Preloading 10 products into Flyweight Cache");
+        System.out.println("[INIT] Preloading 10 products into Flyweight cache (shared Product instances)");
 
         ProductFlyweightFactory.getOrCreate("P1", "Samsung TV", 1200);
         ProductFlyweightFactory.getOrCreate("P2", "iPhone 15", 999);
@@ -23,6 +23,6 @@ public class ProductCatalogConfig {
         ProductFlyweightFactory.getOrCreate("P9", "Gaming Chair", 350);
         ProductFlyweightFactory.getOrCreate("P10", "Desk Lamp", 39);
 
-        System.out.println("[INIT] Loaded Product Count → " + ProductFlyweightFactory.cacheSize());
+        System.out.println("[INIT] Flyweight cache size → " + ProductFlyweightFactory.cacheSize());
     }
 }

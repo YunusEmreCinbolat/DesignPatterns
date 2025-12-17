@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { Product } from '../../core/models/product.model';
 import { CartItem } from '../../core/models/cart-item.model';
-import { DiscountType, CartPriceRequest } from '../../core/models/cart-price-request.model';
+import { DiscountType, CartPriceRequest, DISCOUNT_TYPE_LABELS } from '../../core/models/cart-price-request.model';
 import { CartPriceResponse } from '../../core/models/cart-price-response.model';
 import { DiscountApiService } from '../../core/services/discount-api.service';
 import { ProductApiService } from '../../core/services/product-api.service';
+import { CartApiService } from '../../core/services/cart-api.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -32,6 +33,8 @@ export class CartPageComponent implements OnInit {
   discountType: DiscountType = 'NONE';
   discountTypes: DiscountType[] = [];
 
+  readonly discountTypeLabels = DISCOUNT_TYPE_LABELS;
+
   // Sonuç
   result: CartPriceResponse | null = null;
   loading = false;
@@ -39,7 +42,8 @@ export class CartPageComponent implements OnInit {
 
   constructor(
     private productApi: ProductApiService,
-    private discountApi: DiscountApiService
+    private discountApi: DiscountApiService,
+    private cartApi: CartApiService
   ) {}
 
   ngOnInit(): void {
@@ -129,7 +133,7 @@ export class CartPageComponent implements OnInit {
     this.errorMessage = '';
     this.result = null;
 
-    this.discountApi.calculatePrice(payload).subscribe({
+    this.cartApi.calculatePrice(payload).subscribe({
       next: (res) => {
         this.result = res;
         this.loading = false;
@@ -149,18 +153,16 @@ export class CartPageComponent implements OnInit {
     );
   }
 
-  getDiscountLabel(type: DiscountType): string {
-    switch (type) {
-      case 'NONE':
-        return 'No Discount';
-      case 'PERCENTAGE':
-        return '10% Discount';
-      case 'BUY_X_GET_Y':
-        return 'Buy 2 Get 1';
-      case 'FREE_SHIPPING':
-        return 'Free Shipping';
-      default:
-        return type;
-    }
+  get resultTotalAfterDiscount(): number {
+    if (!this.result) return 0;
+    // Backend yeni alanı göndermiyorsa fallback hesapla
+    return this.result.totalAfterDiscount ?? (this.result.subtotal - this.result.discount);
   }
+
+  get resultShippingFee(): number {
+    if (!this.result) return 0;
+    // Backend yeni alanı göndermiyorsa fallback hesapla
+    return this.result.shippingFee ?? (this.result.finalTotal - this.resultTotalAfterDiscount);
+  }
+
 }

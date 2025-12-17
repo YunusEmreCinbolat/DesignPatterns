@@ -21,7 +21,7 @@ public class ProductController {
 
         List<Product> list = new ArrayList<>(cache.values());
 
-        System.out.println("[API] Returning " + list.size() + " products");
+        System.out.println("[API] GET /api/products → returning " + list.size() + " products from Flyweight cache");
 
         return ResponseEntity.ok(list);
     }
