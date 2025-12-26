@@ -83,7 +83,7 @@ E‑ticarette “kargo hesaplama” farklı sebeplerle değişebilir:
 - Ücretsiz kargo
 - Sepet tutarına göre kargo
 
-Eğer checkout (abstraction) ile shipping (implementation) birbirine sıkı bağlanırsa her kombinasyonda yeni sınıf üretmek zorunda kalırsın.
+Eğer checkout (abstraction) ile shipping (implementation) birbirine sıkı bağlanırsa her kombinasyonda yeni sınıf üretmek zorunda kalınabilir.
 
 Bu projede `Checkout` soyutlaması, `ShippingImplementor` implementasyonuna köprü olur:
 
